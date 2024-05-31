@@ -1,3 +1,4 @@
+import 'package:eletronic_conponents_store/account_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -6,8 +7,6 @@ class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
-
-const primayColor = Color(0xff56ef02);
 
 class _MainPageState extends State<MainPage> {
   @override
@@ -25,7 +24,14 @@ class _MainPageState extends State<MainPage> {
                       height: 150.0,
                       width: 150.0,
                       child: IconButton(
-                        onPressed: null,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MainPage(),
+                            ),
+                          );
+                        },
                         icon: Image.asset('resources/images/img_logo.png'),
                       )),
                   const Text(
@@ -53,6 +59,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
             ],
+            flexibleSpace: Center(),
           ),
         ],
       ),
@@ -83,7 +90,14 @@ class _MainPageState extends State<MainPage> {
               ),
               Tab(
                 child: IconButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AccountPage(),
+                      ),
+                    );
+                  },
                   icon: Image.asset('resources/icons/ic_account.png'),
                 ),
               ),
@@ -93,4 +107,8 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+void SetFragmentPage(){
+
 }

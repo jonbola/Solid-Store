@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -10,20 +11,20 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Column(
-              children: <Widget>[
-                Text(
-                  'ACCOUNT',
-                  style: TextStyle(fontSize: 30.0),
-                ),
-              ],
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100.0),
+        child: Container(
+          margin: const EdgeInsets.only(
+            top: 50.0,
+          ),
+          child: const Center(
+            child: Text(
+              'ACCOUNT',
+              style: TextStyle(fontSize: 30.0),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

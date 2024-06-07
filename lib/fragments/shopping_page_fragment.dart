@@ -20,13 +20,13 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
           SizedBox(
             child: IconButton(
               onPressed: null,
-              icon: Image.asset('resources/ic/ic_search.png'),
+              icon: Image.asset('resources/icons/ic_search.png'),
             ),
           ),
           SizedBox(
             child: IconButton(
               onPressed: null,
-              icon: Image.asset('resources/ic/ic_shopping_cart.png'),
+              icon: Image.asset('resources/icons/ic_shopping_cart.png'),
             ),
           ),
         ],

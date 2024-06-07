@@ -59,42 +59,38 @@ class HomePageFragment extends StatelessWidget {
                         'Loại sản phẩm',
                         style: TextStyle(fontSize: 20.0),
                       ),
-                      ButtonBar(
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: null,
-                            child: Text('RAM'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('CPU'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('GPU'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('Mainboard'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('Màn hình'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('Chuột'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('Bàn phím'),
-                          ),
-                          TextButton(
-                            onPressed: null,
-                            child: Text('Web Cam'),
-                          ),
-                        ],
-                      )
+                      TextButton(
+                        onPressed: null,
+                        child: Text('RAM'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('CPU'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('GPU'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('Mainboard'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('Màn hình'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('Chuột'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('Bàn phím'),
+                      ),
+                      TextButton(
+                        onPressed: null,
+                        child: Text('Web Cam'),
+                      ),
                     ],
                   ),
                   const SizedBox(

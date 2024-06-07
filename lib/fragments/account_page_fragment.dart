@@ -226,108 +226,104 @@ class AccountPageFragment extends StatelessWidget {
           ),
         ),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              Row(
                 children: <Widget>[
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 150.0,
-                        height: 150.0,
-                        child: Image.asset('resources/images/img_logo.png'),
-                      ),
-                      const SizedBox(
-                        width: 50.0,
-                      ),
-                      const Column(
-                        children: <Widget>[
-                          CustomTextField('Tên tài khoản'),
-                          SizedBox(
-                            height: 20.0,
-                          ),
-                          CustomTextField('Email'),
-                        ],
-                      ),
-                    ],
+                  SizedBox(
+                    width: 170.0,
+                    height: 170.0,
+                    child: Image.asset('resources/images/img_logo.png'),
+                  ),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  const Expanded(
+                    child: Column(
+                      children: <Widget>[
+                        CustomTextField('Tên tài khoản'),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        CustomTextField('Email'),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 20.0,
-                  ),
-                  const Row(
-                    children: <Widget>[
-                      CustomTextField('Tên'),
-                      SizedBox(
-                        width: 50.0,
-                      ),
-                      CustomTextField('Họ'),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  const Row(
-                    children: [
-                      MyDropDownButton(genderList, 100.0,'Giới tính'),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      MyDropDownButton(countryList, 200.0, 'Quốc tịch'),
-                    ],
                   ),
                 ],
               ),
-            ),
+              const Row(
+                children: <Widget>[
+                  CustomTextField('Tên'),
+                  SizedBox(
+                    width: 50.0,
+                  ),
+                  CustomTextField('Họ'),
+                ],
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Row(
+                children: [
+                  CustomDropdownButton(genderList, 100.0, 'Giới tính'),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  CustomDropdownButton(countryList, 200.0, 'Quốc tịch'),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
 
-class MyDropDownButton extends StatefulWidget {
+class CustomDropdownButton extends StatefulWidget {
   final List<String> list;
   final double widthMenu;
   final String labelDropDownMenu;
-  const MyDropDownButton(this.list, this.widthMenu, this.labelDropDownMenu,
+  const CustomDropdownButton(this.list, this.widthMenu, this.labelDropDownMenu,
       {super.key});
 
   @override
-  State<MyDropDownButton> createState() => _MyDropDownButtonState();
+  State<CustomDropdownButton> createState() => _CustomDropDownButtonState();
 }
 
-class _MyDropDownButtonState extends State<MyDropDownButton> {
+class _CustomDropDownButtonState extends State<CustomDropdownButton> {
   String dropDownValue = '';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(widget.labelDropDownMenu),
-          ),
-          DropdownMenu<String>(
-            width: widget.widthMenu,
-            initialSelection: widget.list.first,
-            onSelected: (String? value) {
-              setState(
-                () {
-                  dropDownValue = value!;
-                },
-              );
-            },
-            dropdownMenuEntries: widget.list.map<DropdownMenuEntry<String>>(
-              (String value) {
-                return DropdownMenuEntry(value: value, label: value);
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topLeft,
+          child: Text(widget.labelDropDownMenu),
+        ),
+        DropdownMenu<String>(
+          width: widget.widthMenu,
+          initialSelection: widget.list.first,
+          onSelected: (String? value) {
+            setState(
+              () {
+                dropDownValue = value!;
               },
-            ).toList(),
-          ),
-        ],
-      ),
+            );
+          },
+          dropdownMenuEntries: widget.list.map<DropdownMenuEntry<String>>(
+            (String value) {
+              return DropdownMenuEntry(value: value, label: value);
+            },
+          ).toList(),
+        ),
+      ],
     );
   }
 }

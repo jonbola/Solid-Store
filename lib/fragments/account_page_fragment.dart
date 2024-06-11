@@ -1,3 +1,4 @@
+import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 const List<String> countryList = <String>[
@@ -277,6 +278,21 @@ class AccountPageFragment extends StatelessWidget {
                   ),
                   CustomDropdownButton(countryList, 200.0, 'Quốc tịch'),
                 ],
+              ),
+              TextButton(
+                style: const ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(Colors.blue),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainPage(false)),
+                  );
+                },
+                child: const Text(
+                  'Đăng xuất',
+                  style: TextStyle(fontSize: 20.0),
+                ),
               ),
             ],
           ),

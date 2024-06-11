@@ -1,27 +1,31 @@
-import 'package:eletronic_conponents_store/customer_pages/customer_main_page.dart';
-import 'package:eletronic_conponents_store/guest_pages/signin_page.dart';
+import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               const SizedBox(height: 20),
-              Image.asset("assets/images/images.png"),
+              Image.asset(
+                "resources/images/img_logo.png",
+                width: MediaQuery.of(context).size.width / 2,
+              ),
               const SizedBox(height: 10),
               const Text(
-                "Welcome",
+                "Create your account",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -41,7 +45,67 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   border: Border.all(color: Colors.indigo, width: 1.5),
                   boxShadow: const [
-                     BoxShadow(
+                    BoxShadow(
+                      color: Color(0xFFE7EEF8),
+                      blurRadius: 1.0,
+                      offset: Offset(2.6, 2.6),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: "Fullname",
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.person),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(left: 20, right: 15),
+                height: 60,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFFFFF),
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(45),
+                    bottomLeft: Radius.circular(45),
+                  ),
+                  border: Border.all(color: Colors.indigo, width: 1.5),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0xFFE7EEF8),
+                      blurRadius: 1.0,
+                      offset: Offset(2.6, 2.6),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: "Phone Number",
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.phone),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.only(left: 20, right: 15),
+                height: 60,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFFFFF),
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(45),
+                    bottomLeft: Radius.circular(45),
+                  ),
+                  border: Border.all(color: Colors.indigo, width: 1.5),
+                  boxShadow: const [
+                    BoxShadow(
                       color: Color(0xFFE7EEF8),
                       blurRadius: 1.0,
                       offset: Offset(2.6, 2.6),
@@ -99,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const CustomerMainPage(),
+                            builder: (context) => const LoginPage(),
                           ));
                     },
                     child: Container(
@@ -127,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Login",
+                              "Sign up",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -148,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SigninPage(),
+                            builder: (context) => const LoginPage(),
                           ));
                     },
                     child: Container(
@@ -175,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: const Center(
                         child: Text(
-                          "Sign up",
+                          "Back",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -204,8 +268,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Image.asset(
-                        "assets/images/google-icon-2048x2048-pks9lbdv.png"),
+                    child: Image.asset("resources/images/img_google_logo.png"),
                   ),
                   const SizedBox(width: 30),
                   Container(
@@ -222,7 +285,8 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Image.asset("assets/images/images-2.png"),
+                    child:
+                        Image.asset("resources/images/img_facebook_logo.png"),
                   ),
                 ],
               ),

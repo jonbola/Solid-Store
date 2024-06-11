@@ -62,15 +62,20 @@ flutter:
   assets:
   - resources/images/img_logo.png
   - resources/images/img_app_background.png
+  - resources/images/img_google_logo.png
+  - resources/images/img_facebook_logo.png
+
+  - resources/images_product/img_cpu_product.png
+  - resources/images_product/img_gpu_product.png
+  - resources/images_product/img_ram_product.png
+
   - resources/icons/ic_shopping_cart.png
   - resources/icons/ic_home.png
   - resources/icons/ic_account.png
   - resources/icons/ic_shopping.png
   - resources/icons/ic_arrow_up.png
   - resources/icons/ic_search.png
-  - resources/images_product/img_cpu_product.png
-  - resources/images_product/img_gpu_product.png
-  - resources/images_product/img_ram_product.png
+  - resources/icons/ic_exit.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

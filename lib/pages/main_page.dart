@@ -1,20 +1,21 @@
 import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
+import 'package:eletronic_conponents_store/fragments/customer_shopping_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
-import 'package:eletronic_conponents_store/fragments/shopping_page_fragment.dart';
 import 'package:flutter/material.dart';
 
-class CustomerMainPage extends StatefulWidget {
-  const CustomerMainPage({super.key});
+class MainPage extends StatefulWidget {
+  final bool isLogin;
+  const MainPage(this.isLogin, {super.key});
 
   @override
-  State<CustomerMainPage> createState() => _CustomerMainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _CustomerMainPageState extends State<CustomerMainPage> {
+class _MainPageState extends State<MainPage> {
   int currentPage = 0;
   final List<Widget> pages = [
-    const HomePageFragment(),
-    const ShoppingPageFragment(),
+    const HomePageFragment(true),
+    const CustomerShoppingPageFragment(),
     const AccountPageFragment(),
   ];
   void changePageFragment(int index) {
@@ -22,6 +23,7 @@ class _CustomerMainPageState extends State<CustomerMainPage> {
       currentPage = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

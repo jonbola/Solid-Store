@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
-class GuestShoppingPageFragment extends StatefulWidget {
-  const GuestShoppingPageFragment({super.key});
+class CustomerShoppingPageFragment extends StatelessWidget {
+  const CustomerShoppingPageFragment({super.key});
 
-  @override
-  State<GuestShoppingPageFragment> createState() =>
-      _GuestShoppingPageFragmentState();
-}
-
-class _GuestShoppingPageFragmentState extends State<GuestShoppingPageFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +16,12 @@ class _GuestShoppingPageFragmentState extends State<GuestShoppingPageFragment> {
             child: IconButton(
               onPressed: null,
               icon: Image.asset('resources/icons/ic_search.png'),
+            ),
+          ),
+          SizedBox(
+            child: IconButton(
+              onPressed: null,
+              icon: Image.asset('resources/icons/ic_shopping_cart.png'),
             ),
           ),
         ],

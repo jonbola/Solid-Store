@@ -1,8 +1,9 @@
+import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePageFragment extends StatelessWidget {
-  const HomePageFragment({super.key});
-
+  final bool isLogin;
+  const HomePageFragment(this.isLogin, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,10 +15,10 @@ class HomePageFragment extends StatelessWidget {
             toolbarHeight: 120.0,
             title: Row(
               children: <Widget>[
-                SizedBox(
+                Image.asset(
+                  'resources/images/img_logo.png',
                   height: 100.0,
                   width: 100.0,
-                  child: Image.asset('resources/images/img_logo.png'),
                 ),
                 const Text(
                   'Solid Electronic',
@@ -25,24 +26,34 @@ class HomePageFragment extends StatelessWidget {
                 ),
               ],
             ),
-            actions: <Widget>[
-              SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: IconButton(
-                  onPressed: null,
-                  icon: Image.asset('resources/icons/ic_search.png'),
-                ),
-              ),
-              SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: IconButton(
-                  onPressed: null,
-                  icon: Image.asset('resources/icons/ic_shopping_cart.png'),
-                ),
-              ),
-            ],
+            actions: isLogin
+                ? <Widget>[
+                    SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: IconButton(
+                        onPressed: null,
+                        icon:
+                            Image.asset('resources/icons/ic_shopping_cart.png'),
+                      ),
+                    ),
+                  ]
+                : <Widget>[
+                    SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()),
+                          );
+                        },
+                        icon: Image.asset('resources/icons/ic_exit.png'),
+                      ),
+                    ),
+                  ],
           ),
         ),
       ),
@@ -53,46 +64,6 @@ class HomePageFragment extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  const Row(
-                    children: [
-                      Text(
-                        'Loại sản phẩm',
-                        style: TextStyle(fontSize: 20.0),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('RAM'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('CPU'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('GPU'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('Mainboard'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('Màn hình'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('Chuột'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('Bàn phím'),
-                      ),
-                      TextButton(
-                        onPressed: null,
-                        child: Text('Web Cam'),
-                      ),
-                    ],
-                  ),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -108,7 +79,8 @@ class HomePageFragment extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 150.0,
-                    child: Row(
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Image.asset(
                             'resources/images_product/img_cpu_product.png'),
@@ -122,13 +94,14 @@ class HomePageFragment extends StatelessWidget {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Sale',
+                      'Khuyến mãi',
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
                   SizedBox(
                     height: 150.0,
-                    child: Row(
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Image.asset(
                             'resources/images_product/img_cpu_product.png'),
@@ -151,7 +124,8 @@ class HomePageFragment extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 150.0,
-                    child: Row(
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Image.asset(
                             'resources/images_product/img_cpu_product.png'),
@@ -167,6 +141,97 @@ class HomePageFragment extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class GuestAppBarFragment extends StatelessWidget {
+  const GuestAppBarFragment({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(150.0),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: AppBar(
+            toolbarHeight: 120.0,
+            title: Row(
+              children: <Widget>[
+                Image.asset(
+                  'resources/images/img_logo.png',
+                  height: 100.0,
+                  width: 100.0,
+                ),
+                const Text(
+                  'Solid Electronic',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
+                    );
+                  },
+                  icon: Image.asset('resources/icons/ic_exit.png'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomerAppBarFragment extends StatelessWidget {
+  const CustomerAppBarFragment({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(150.0),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            toolbarHeight: 120.0,
+            title: Row(
+              children: <Widget>[
+                Image.asset(
+                  'resources/images/img_logo.png',
+                  height: 100.0,
+                  width: 100.0,
+                ),
+                const Text(
+                  'Solid Electronic',
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: IconButton(
+                  onPressed: null,
+                  icon: Image.asset('resources/icons/ic_shopping_cart.png'),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

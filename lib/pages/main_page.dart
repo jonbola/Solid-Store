@@ -1,6 +1,6 @@
 import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
-import 'package:eletronic_conponents_store/fragments/customer_shopping_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
+import 'package:eletronic_conponents_store/fragments/shopping_page_fragment.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -13,22 +13,28 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentPage = 0;
-  final List<Widget> pages = [
-    const HomePageFragment(true),
-    const CustomerShoppingPageFragment(),
-    const AccountPageFragment(),
-  ];
+  late List<Widget> pages;
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      HomePageFragment(widget.isLogin),
+      ShoppingPageFragment(widget.isLogin),
+      AccountPageFragment(widget.isLogin),
+    ];
+  }
+
   void changePageFragment(int index) {
     setState(() {
       currentPage = index;
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(),
         body: IndexedStack(
           index: currentPage,
           children: pages,

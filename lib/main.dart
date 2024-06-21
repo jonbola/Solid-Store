@@ -1,4 +1,7 @@
+import 'package:eletronic_conponents_store/fragments/product_item_fragment.dart';
+import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
+import 'package:eletronic_conponents_store/pages/product_detail_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,12 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Solid Electronic',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPage(false),
+      // home: const MainPage(false),
+      // home: const ProductDetailPage(true),
+      home: const CartPage(),
     );
   }
 }

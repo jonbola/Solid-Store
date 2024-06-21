@@ -1,6 +1,7 @@
 import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:eletronic_conponents_store/pages/signin_page.dart';
 import 'package:flutter/material.dart';
+import 'package:eletronic_conponents_store/tools/extensions/string_validate.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

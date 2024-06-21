@@ -74,8 +74,14 @@ flutter:
   - resources/icons/ic_account.png
   - resources/icons/ic_shopping.png
   - resources/icons/ic_arrow_up.png
+  - resources/icons/ic_arrow_left.png
   - resources/icons/ic_search.png
   - resources/icons/ic_exit.png
+  - resources/icons/ic_menu.png
+  - resources/icons/ic_check.png
+  - resources/icons/ic_cancel.png
+  - resources/icons/ic_plus.png
+  - resources/icons/ic_minus.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

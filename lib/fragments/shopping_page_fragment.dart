@@ -1,4 +1,6 @@
+import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:searchable_listview/searchable_listview.dart';
 
 class ShoppingPageFragment extends StatefulWidget {
   final bool isLogin;
@@ -10,6 +12,7 @@ class ShoppingPageFragment extends StatefulWidget {
 
 class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
   late bool isVisible;
+  final searchFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -39,18 +42,17 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
           ),
         ),
         actions: <Widget>[
-          SizedBox(
-            child: IconButton(
-              onPressed: () {
-                setVisible();
-              },
-              icon: Image.asset('resources/icons/ic_search.png'),
-            ),
-          ),
           widget.isLogin
               ? SizedBox(
                   child: IconButton(
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CartPage(),
+                        ),
+                      );
+                    },
                     icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                   ),
                 )
@@ -109,32 +111,9 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget>[
-            Visibility(
-              visible: isVisible,
-              child: const Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 300.0,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Tìm kiếm',
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const Text(
-              'Danh sách sản phẩm',
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ],
-        ),
+        child: SearchableList.sliver(initialList: initialList, itemBuilder: itemBuilder),
       ),
     );
   }
+  
 }

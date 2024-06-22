@@ -34,7 +34,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
         body: IndexedStack(
           index: currentPage,
           children: pages,

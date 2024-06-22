@@ -1,6 +1,7 @@
 import 'package:eletronic_conponents_store/tools/values/colors.dart';
 import 'package:eletronic_conponents_store/tools/values/string_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ProductItemFragment extends StatefulWidget {
   final String imageDic;
@@ -10,8 +11,17 @@ class ProductItemFragment extends StatefulWidget {
   State<ProductItemFragment> createState() => _ProductItemFragmentState();
 }
 
+late int count;
+final textFieldController = TextEditingController();
+
 class _ProductItemFragmentState extends State<ProductItemFragment> {
-  int count = 1;
+  @override
+  void initState() {
+    super.initState();
+    count = 1;
+    textFieldController.text = count.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,12 +31,15 @@ class _ProductItemFragmentState extends State<ProductItemFragment> {
           width: 100.0,
           height: 100.0,
         ),
-        const Text(
-          'Tên sản phẩm',
-          style: blackText,
+        const SizedBox(
+          width: 120.0,
+          child: Text(
+            'Tên sản phẩm',
+            style: blackText,
+          ),
         ),
         const SizedBox(
-          width: 50.0,
+          width: 20.0,
         ),
         SizedBox(
           width: 30.0,
@@ -34,29 +47,34 @@ class _ProductItemFragmentState extends State<ProductItemFragment> {
           child: IconButton.outlined(
             onPressed: () {
               setState(() {
-                count--;
+                if (count == 1) {
+                  null;
+                } else {
+                  count--;
+                  textFieldController.text = count.toString();
+                }
               });
             },
             icon: Image.asset('resources/icons/ic_minus.png'),
           ),
         ),
         const SizedBox(
-          width: 15.0,
+          width: 10.0,
         ),
-        Container(
-          width: 30.0,
-          decoration:
-              BoxDecoration(border: Border.all(width: 1.0, color: black)),
-          child: Container(
-            margin: const EdgeInsets.only(left: 2.0),
-            child: Text(
-              '$count',
-              style: const TextStyle(fontSize: 20.0),
-            ),
-          ),
-        ),
+        SizedBox(
+            width: 50.0,
+            child: TextField(
+              onEditingComplete: () {
+                setState(() {
+                  count = int.parse(textFieldController.text);
+                });
+              },
+              controller: textFieldController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            )),
         const SizedBox(
-          width: 15.0,
+          width: 10.0,
         ),
         SizedBox(
           width: 30.0,
@@ -65,6 +83,7 @@ class _ProductItemFragmentState extends State<ProductItemFragment> {
             onPressed: () {
               setState(() {
                 count++;
+                textFieldController.text = count.toString();
               });
             },
             icon: Image.asset('resources/icons/ic_plus.png'),

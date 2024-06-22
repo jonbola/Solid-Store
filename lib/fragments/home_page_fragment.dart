@@ -1,3 +1,4 @@
+import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:eletronic_conponents_store/tools/components.dart';
@@ -25,127 +26,129 @@ class _HomePageFragmentState extends State<HomePageFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(125.0),
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: AppBar(
-            automaticallyImplyLeading: true,
-            toolbarHeight: 150.0,
-            title: Row(
-              children: <Widget>[
-                Image.asset(
-                  'resources/images/img_logo.png',
-                  height: 70.0,
-                  width: 70.0,
-                ),
-                const Text(
-                  'Solid Electronic',
-                  style: blackBody,
-                ),
-              ],
-            ),
-            actions: widget.isLogin
-                ? <Widget>[
-                    SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: IconButton(
-                        onPressed: null,
-                        icon:
-                            Image.asset('resources/icons/ic_shopping_cart.png'),
-                      ),
-                    ),
-                  ]
-                : <Widget>[
-                    SizedBox(
-                      width: 50.0,
-                      height: 50.0,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginPage(),
-                            ),
-                          );
-                        },
-                        icon: Image.asset('resources/icons/ic_exit.png'),
-                      ),
-                    ),
-                  ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 100.0,
+          titleSpacing: -10.0,
+          title: Row(
+            children: <Widget>[
+              Image.asset(
+                'resources/images/img_logo.png',
+                height: 70.0,
+                width: 70.0,
+              ),
+              const Text(
+                'Solid Electronic',
+                style: blackBody,
+              ),
+            ],
           ),
-        ),
-      ),
-      drawer: Drawer(
-        width: 150.0,
-        child: Column(
-          children: <Widget>[
-            const Text(
-              'Loại sản phẩm',
-              style: blackText,
-            ),
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: const [
-                  TextButton(
-                    onPressed: null,
-                    child: Text('CPU'),
+          actions: widget.isLogin
+              ? <Widget>[
+                  SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartPage(),
+                          ),
+                        );
+                      },
+                      icon: Image.asset('resources/icons/ic_shopping_cart.png'),
+                    ),
                   ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('GPU'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('RAM'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('HDD'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('SSD'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Chuột'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Màn hình'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Vỏ case'),
+                ]
+              : <Widget>[
+                  SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                      icon: Image.asset('resources/icons/ic_exit.png'),
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ],
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            const LeftText('Sản phẩm bán chạy', blackText),
-            HorizontalListView(imageList),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const LeftText('Khuyến mãi', blackText),
-            HorizontalListView(imageList),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const LeftText('Sản phẩm mới', blackText),
-            HorizontalListView(imageList),
-          ],
+        drawer: Drawer(
+          width: 150.0,
+          child: Column(
+            children: <Widget>[
+              const Text(
+                'Loại sản phẩm',
+                style: blackText,
+              ),
+              Expanded(
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: const [
+                    TextButton(
+                      onPressed: null,
+                      child: Text('CPU'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('GPU'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('RAM'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('HDD'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('SSD'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('Chuột'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('Màn hình'),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text('Vỏ case'),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            children: <Widget>[
+              const LeftText('Sản phẩm bán chạy', blackText),
+              HorizontalListView(imageList),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const LeftText('Khuyến mãi', blackText),
+              HorizontalListView(imageList),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const LeftText('Sản phẩm mới', blackText),
+              HorizontalListView(imageList),
+            ],
+          ),
         ),
       ),
     );

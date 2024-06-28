@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 extension StringValidate on String {
   bool isEmailValidate() {
     if (contains('@gmail.com')) {

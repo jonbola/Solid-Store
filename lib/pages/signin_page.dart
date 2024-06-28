@@ -1,4 +1,6 @@
 import 'package:eletronic_conponents_store/pages/login_page.dart';
+import 'package:eletronic_conponents_store/tools/extensions/string_validate.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
@@ -9,6 +11,10 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+  final nameFieldController = TextEditingController();
+  final phoneFieldController = TextEditingController();
+  final emailFieldController = TextEditingController();
+  final passwordFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,6 +60,7 @@ class _SigninPageState extends State<SigninPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: nameFieldController,
                     decoration: const InputDecoration(
                       hintText: "Fullname",
                       border: InputBorder.none,
@@ -84,6 +91,7 @@ class _SigninPageState extends State<SigninPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: phoneFieldController,
                     decoration: const InputDecoration(
                       hintText: "Phone Number",
                       border: InputBorder.none,
@@ -114,6 +122,7 @@ class _SigninPageState extends State<SigninPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: emailFieldController,
                     decoration: const InputDecoration(
                       hintText: "Email",
                       border: InputBorder.none,
@@ -144,6 +153,7 @@ class _SigninPageState extends State<SigninPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: passwordFieldController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: "Password",
@@ -160,11 +170,16 @@ class _SigninPageState extends State<SigninPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ));
+                      if (nameFieldController.text.isEmpty ||
+                          phoneFieldController.text.isEmpty ||
+                          emailFieldController.text.isEmpty ||
+                          passwordFieldController.text.isEmpty) {
+                        return;
+                      } else if (!emailFieldController.text.isEmailValidate()) {
+                        return;
+                      } else {
+                        changeReturnablePage(context, build, const LoginPage());
+                      }
                     },
                     child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -210,10 +225,11 @@ class _SigninPageState extends State<SigninPage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginPage(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginPage(),
+                        ),
+                      );
                     },
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),

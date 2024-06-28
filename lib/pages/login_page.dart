@@ -11,6 +11,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final accountFieldController = TextEditingController();
+  final passwordFieldController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: accountFieldController,
                     decoration: const InputDecoration(
                       hintText: "Email",
                       border: InputBorder.none,
@@ -81,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: Center(
                   child: TextFormField(
+                    controller: passwordFieldController,
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: "Password",
@@ -97,11 +106,23 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
+                      if (accountFieldController.text.isEmpty ||
+                          passwordFieldController.text.isEmpty) {
+                        return;
+                      } else if (!accountFieldController.text
+                          .isEmailValidate()) {
+                        return;
+                        // } else if (!passwordFieldController.text
+                        //     .isPasswordStrong()) {
+                        //   return;
+                      } else {
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const MainPage(true),
-                          ));
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),

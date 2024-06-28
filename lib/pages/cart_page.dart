@@ -1,8 +1,7 @@
 import 'package:eletronic_conponents_store/fragments/product_item_fragment.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
-import 'package:eletronic_conponents_store/tools/components.dart';
-import 'package:eletronic_conponents_store/tools/values/colors.dart';
-import 'package:eletronic_conponents_store/tools/values/string_style.dart';
+import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -18,14 +17,16 @@ class _CartPageState extends State<CartPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: lightBlue,
-          title: const MiddleText('GIỎ HÀNG', whiteHead),
+          backgroundColor: lightBlueColor,
+          title: const CustomText('GIỎ HÀNG', 30.0, FontStyle.normal,
+              FontWeight.bold, whiteColor, Alignment.center),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              const LeftText('Danh sách sản phẩm', blackBody),
+              const CustomText('Danh sách sản phẩm', 20.0, FontStyle.normal,
+                  FontWeight.normal, blackColor, Alignment.centerLeft),
               Expanded(
                 child: ListView(
                   scrollDirection: Axis.vertical,
@@ -48,14 +49,10 @@ class _CartPageState extends State<CartPage> {
                   width: 200.0,
                   child: Row(
                     children: <Widget>[
-                      Text(
-                        'Tổng tiền: ',
-                        style: blackText,
-                      ),
-                      Text(
-                        '0' + ' VNĐ',
-                        style: blackText,
-                      ),
+                      CustomText('Tổng tiền: ', 20.0, FontStyle.normal,
+                          FontWeight.normal, blackColor, Alignment.centerRight),
+                      CustomText('0' + ' VNĐ', 20.0, FontStyle.normal,
+                          FontWeight.normal, blackColor, Alignment.centerRight),
                     ],
                   ),
                 ),
@@ -69,7 +66,7 @@ class _CartPageState extends State<CartPage> {
                     margin: const EdgeInsets.only(left: 30.0),
                     child: TextButton(
                       style: const ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(blue),
+                        backgroundColor: WidgetStatePropertyAll(blueColor),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -79,10 +76,13 @@ class _CartPageState extends State<CartPage> {
                           ),
                         );
                       },
-                      child: const Text(
-                        'Tiếp tục mua sắm',
-                        style: whiteText,
-                      ),
+                      child: const CustomText(
+                          'Tiếp tục mua sắm',
+                          20.0,
+                          FontStyle.normal,
+                          FontWeight.normal,
+                          whiteColor,
+                          Alignment.center),
                     ),
                   ),
                   const SizedBox(
@@ -90,16 +90,14 @@ class _CartPageState extends State<CartPage> {
                   ),
                   const TextButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(blue),
+                      backgroundColor: WidgetStatePropertyAll(blueColor),
                     ),
                     onPressed: null,
-                    child: Text(
-                      'Thanh toán',
-                      style: whiteText,
-                    ),
+                    child: CustomText('Thanh toán', 20.0, FontStyle.normal,
+                        FontWeight.normal, whiteColor, Alignment.center),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

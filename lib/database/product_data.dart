@@ -31,14 +31,14 @@ class ProductItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Id: ${product.id}',
+                  'Id: ${product.name}',
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Lastname: ${product.name}',
+                  'Lastname: ${product.price}',
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -62,11 +62,11 @@ class ProductItem extends StatelessWidget {
 class Product {
   int id;
   String name;
+  double price;
   String description;
-  Product({required this.id, required this.name, required this.description});
-
-  List<Product> productList = [
-    Product(id: 01, name: 'CPU', description: 'Main core'),
-    Product(id: 02, name: 'GPU', description: 'Main graphic'),
-  ];
+  Product(
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.description});
 }

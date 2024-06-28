@@ -1,5 +1,5 @@
-import 'package:eletronic_conponents_store/tools/values/colors.dart';
-import 'package:eletronic_conponents_store/tools/values/string_style.dart';
+import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,10 +33,8 @@ class _ProductItemFragmentState extends State<ProductItemFragment> {
         ),
         const SizedBox(
           width: 120.0,
-          child: Text(
-            'Tên sản phẩm',
-            style: blackText,
-          ),
+          child: CustomText('Tên sản phẩm', 20.0, FontStyle.normal,
+              FontWeight.normal, blackColor, Alignment.center),
         ),
         const SizedBox(
           width: 20.0,

@@ -1,7 +1,8 @@
+import 'package:eletronic_conponents_store/pages/cart_page.dart';
+import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
-import 'package:eletronic_conponents_store/tools/values/string_style.dart';
-import 'package:eletronic_conponents_store/tools/components.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final bool isLogin;
@@ -37,9 +38,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  LeftText('Tên sản phẩm', blackHead),
-                  LeftText('Mô tả', blackHead),
-                  LeftText('Mô tả', blackBody),
+                  CustomText('Tên sản phẩm', 30.0, FontStyle.normal,
+                      FontWeight.bold, blackColor, Alignment.centerLeft),
+                  CustomText('Mô tả', 30.0, FontStyle.normal, FontWeight.bold,
+                      blackColor, Alignment.centerLeft),
+                  CustomText('Mô tả', 20.0, FontStyle.normal, FontWeight.normal,
+                      blackColor, Alignment.centerLeft),
                 ],
               ),
             ),
@@ -52,15 +56,25 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(left: 90.0),
-                      child: const TextButton(
-                        onPressed: null,
-                        style: ButtonStyle(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CartPage(),
+                            ),
+                          );
+                        },
+                        style: const ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.blue),
                         ),
-                        child: Text(
-                          'Thêm vào giỏ hàng',
-                          style: whiteText,
-                        ),
+                        child: const CustomText(
+                            'Thêm vào giỏ hàng',
+                            20.0,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                            whiteColor,
+                            Alignment.center),
                       ),
                     ),
                     const Spacer(),
@@ -69,7 +83,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       height: 50.0,
                       width: 50.0,
                       child: IconButton(
-                        onPressed: null,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CartPage(),
+                            ),
+                          );
+                        },
                         icon:
                             Image.asset('resources/icons/ic_shopping_cart.png'),
                       ),
@@ -86,10 +107,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                       );
                     },
-                    child: const Text(
-                      'Đăng nhập',
-                      style: whiteText,
+                    style: const ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.blue),
                     ),
+                    child: const CustomText('Đăng nhập', 20.0, FontStyle.normal,
+                        FontWeight.normal, whiteColor, Alignment.center),
                   ),
                 ),
         ),

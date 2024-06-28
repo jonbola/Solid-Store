@@ -56,15 +56,15 @@ class _MainPageState extends State<MainPage> {
                 width: 50.0,
                 height: 50.0,
               ),
-              label: 'Home',
+              label: 'Trang chủ',
             ),
             BottomNavigationBarItem(
                 icon: Image.asset(
-                  'resources/icons/ic_shopping.png',
+                  'resources/icons/ic_search.png',
                   width: 50.0,
                   height: 50.0,
                 ),
-                label: 'Shopping'),
+                label: 'Tìm kiếm'),
             BottomNavigationBarItem(
               backgroundColor: Colors.blue,
               icon: Image.asset(
@@ -72,7 +72,7 @@ class _MainPageState extends State<MainPage> {
                 width: 50.0,
                 height: 50.0,
               ),
-              label: 'Account',
+              label: 'Tài khoản',
             ),
           ],
         ),

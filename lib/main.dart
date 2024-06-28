@@ -1,3 +1,4 @@
+import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPage(false),
+      // home: const MainPage(false),
+      home: const AccountPageFragment(true),
     );
   }
 }

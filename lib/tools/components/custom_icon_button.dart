@@ -4,10 +4,10 @@ class CustomIconButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
   final AlignmentGeometry align;
-  final void function;
-  final Widget graphicDic;
+  final Function()? function;
+  final Widget graphicWidget;
   const CustomIconButton(this.buttonWidth, this.buttonHeight, this.align,
-      this.function, this.graphicDic,
+      this.function, this.graphicWidget,
       {super.key});
 
   @override
@@ -18,10 +18,8 @@ class CustomIconButton extends StatelessWidget {
         width: buttonWidth,
         height: buttonHeight,
         child: IconButton(
-          onPressed: () {
-            function;
-          },
-          icon: graphicDic,
+          onPressed: function,
+          icon: graphicWidget,
         ),
       ),
     );

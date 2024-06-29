@@ -41,9 +41,14 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                         Visibility(
                           visible: isVisible,
                           child: CustomIconButton(
-                              70.0, 70.0, Alignment.centerLeft, setState(() {
-                            isVisible = false;
-                          }), Image.asset('resources/icons/ic_cancel.png')),
+                              70.0,
+                              70.0,
+                              Alignment.centerLeft,
+                              () => setState(() {
+                                    isVisible = false;
+                                    isEnabled = false;
+                                  }),
+                              Image.asset('resources/icons/ic_cancel.png')),
                         ),
                         const Spacer(),
                         const CustomText('TÀI KHOẢN', 30.0, FontStyle.normal,
@@ -52,9 +57,14 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                         Visibility(
                           visible: isVisible,
                           child: CustomIconButton(
-                              70.0, 70.0, Alignment.centerRight, setState(() {
-                            isVisible = false;
-                          }), Image.asset('resources/icons/ic_check.png')),
+                              70.0,
+                              70.0,
+                              Alignment.centerRight,
+                              () => setState(() {
+                                    isVisible = false;
+                                    isEnabled = false;
+                                  }),
+                              Image.asset('resources/icons/ic_check.png')),
                         ),
                       ],
                     ),
@@ -93,129 +103,145 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 200.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Email',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomTextfield(200.0, 50.0, isEnabled, 'Email'),
-                            ],
-                          ),
+                    SizedBox(
+                      child: FittedBox(
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 200.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Email',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomTextfield(
+                                      200.0, 50.0, isEnabled, 'Email'),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            SizedBox(
+                              width: 200.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Số điện thoại',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomTextfield(
+                                      200.0, 50.0, isEnabled, 'Số điện thoại'),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 20.0,
-                        ),
-                        SizedBox(
-                          width: 200.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Số điện thoại',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomTextfield(
-                                  200.0, 50.0, isEnabled, 'Số điện thoại'),
-                            ],
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20.0,
                     ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 200.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Họ',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomTextfield(200.0, 50.0, isEnabled, 'Họ'),
-                            ],
-                          ),
+                    SizedBox(
+                      child: FittedBox(
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 200.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Họ',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomTextfield(200.0, 50.0, isEnabled, 'Họ'),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            SizedBox(
+                              width: 200.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Tên',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomTextfield(
+                                      200.0, 50.0, isEnabled, 'Tên'),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 20.0,
-                        ),
-                        SizedBox(
-                          width: 200.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Tên',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomTextfield(200.0, 50.0, isEnabled, 'Tên'),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20.0,
                     ),
-                    Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 150.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Giới tính',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomDropdownMenu(isEnabled, genderList, 150.0),
-                            ],
-                          ),
+                    SizedBox(
+                      child: FittedBox(
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 150.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Giới tính',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomDropdownMenu(
+                                      isEnabled, genderList, 150.0),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            SizedBox(
+                              width: 250.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  const CustomText(
+                                      'Quốc tịch',
+                                      20.0,
+                                      FontStyle.normal,
+                                      FontWeight.bold,
+                                      blackColor,
+                                      Alignment.centerLeft),
+                                  CustomDropdownMenu(
+                                      isEnabled, countryList, 250.0),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          width: 20.0,
-                        ),
-                        SizedBox(
-                          width: 250.0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              const CustomText(
-                                  'Quốc tịch',
-                                  20.0,
-                                  FontStyle.normal,
-                                  FontWeight.bold,
-                                  blackColor,
-                                  Alignment.centerLeft),
-                              CustomDropdownMenu(isEnabled, countryList, 250.0),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const SizedBox(
                       height: 20.0,
@@ -224,99 +250,65 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                       250.0,
                       50.0,
                       lightBlueColor,
-                      const CustomText('Thay đổi thông tin', 20.0, FontStyle.normal, FontWeight.normal, whiteColor, Alignment.center),
-                      setState(() {
+                      const CustomText(
+                          'Thay đổi thông tin',
+                          20.0,
+                          FontStyle.normal,
+                          FontWeight.normal,
+                          whiteColor,
+                          Alignment.center),
+                      () => setState(() {
                         isEnabled = true;
                         isVisible = true;
                       }),
                     ),
-                  ],
-                ),
-                //       SizedBox(
-                //         width: 200.0,
-                //         height: 50.0,
-                //         child: TextButton(
-                //           style: const ButtonStyle(
-                //             backgroundColor:
-                //                 WidgetStatePropertyAll(Colors.blue),
-                //           ),
-                //           onPressed: () {
-                //             setState(() {
-                //               isEnabled = true;
-                //             });
-                //           },
-                //           child: const Text(
-                //             'Thay đổi thông tin',
-                //             style:
-                //                 TextStyle(fontSize: 20.0, color: Colors.white),
-                //           ),
-                //         ),
-                //       ),
-                //       const SizedBox(
-                //         height: 20.0,
-                //       ),
-                //       SizedBox(
-                //         width: 150.0,
-                //         height: 50.0,
-                //         child: TextButton(
-                //           style: const ButtonStyle(
-                //             backgroundColor:
-                //                 WidgetStatePropertyAll(Colors.blue),
-                //           ),
-                //           onPressed: () {
-                //             Navigator.pushReplacement(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) => const MainPage(false)),
-                //             );
-                //           },
-                //           child: const Text(
-                //             'Đăng xuất',
-                //             style:
-                //                 TextStyle(fontSize: 20.0, color: Colors.white),
-                //           ),
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-              ),
-            )
-          : Scaffold(
-              body: Container(
-                margin: const EdgeInsets.only(left: 80.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'Đăng nhập để tiếp tục sử dụng',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
                     const SizedBox(
                       height: 20.0,
                     ),
-                    SizedBox(
-                      width: 150.0,
-                      height: 50.0,
-                      child: TextButton(
-                        style: const ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginPage()),
-                          );
-                        },
-                        child: const Text(
-                          'Đăng nhập',
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    CustomTextButton(
+                      150.0,
+                      50.0,
+                      lightBlueColor,
+                      const CustomText('Đăng xuất', 20.0, FontStyle.normal,
+                          FontWeight.normal, whiteColor, Alignment.center),
+                      () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const MainPage(false),
                         ),
                       ),
                     ),
                   ],
                 ),
+              ),
+            )
+          : Scaffold(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const CustomText(
+                      'Đăng nhập để sử dụng',
+                      20.0,
+                      FontStyle.normal,
+                      FontWeight.normal,
+                      blackColor,
+                      Alignment.center),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  CustomTextButton(
+                    150.0,
+                    50.0,
+                    lightBlueColor,
+                    const CustomText('Đăng nhập', 20.0, FontStyle.normal,
+                        FontWeight.normal, whiteColor, Alignment.center),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
     );

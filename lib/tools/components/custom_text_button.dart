@@ -5,7 +5,7 @@ class CustomTextButton extends StatelessWidget {
   final double buttonHeight;
   final Color color;
   final Widget textWidget;
-  final void function;
+  final Function()? function;
   const CustomTextButton(this.buttonWidth, this.buttonHeight, this.color,
       this.textWidget, this.function,
       {super.key});
@@ -17,9 +17,7 @@ class CustomTextButton extends StatelessWidget {
       height: buttonHeight,
       child: TextButton(
         style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color)),
-        onPressed: () {
-          function;
-        },
+        onPressed: function,
         child: textWidget,
       ),
     );

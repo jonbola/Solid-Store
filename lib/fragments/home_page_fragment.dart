@@ -1,5 +1,6 @@
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
+import 'package:eletronic_conponents_store/tools/components/auto_horizontal_listview.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/manual_horizontal_listview.dart';
 import 'package:eletronic_conponents_store/tools/components/manual_vertical_listview.dart';
@@ -8,6 +9,7 @@ import 'package:eletronic_conponents_store/tools/functions/convert_to_iconbutton
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:eletronic_conponents_store/tools/values/object_values.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
 class HomePageFragment extends StatefulWidget {
   final bool isLogin;
@@ -74,18 +76,22 @@ class _HomePageFragmentState extends State<HomePageFragment> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: <Widget>[
-              const CustomText('SẢN PHẨM MỚI', 30.0, FontStyle.normal,
-                  FontWeight.bold, blackColor, Alignment.centerLeft),
-              ManualHorizontalListview(objectList,300.0, 300.0, 300.0),
-              const SizedBox(
-                height: 20.0,
-              ),
-              const CustomText('Sản phẩm bán chạy', 20.0, FontStyle.normal,
-                  FontWeight.normal, blackColor, Alignment.centerLeft),
-              ManualHorizontalListview(objectList,200.0, 200.0, 200.0),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                const CustomText('SẢN PHẨM MỚI', 30.0, FontStyle.normal,
+                    FontWeight.bold, blackColor, Alignment.centerLeft),
+                const SizedBox(
+                  height: 20.0,
+                ),
+                const CustomText('Sản phẩm bán chạy', 20.0, FontStyle.normal,
+                    FontWeight.normal, blackColor, Alignment.centerLeft),
+                ManualHorizontalListview(objectList, 200.0, 200.0, 200.0),
+                const CustomText('Khuyến mãi', 20.0, FontStyle.normal,
+                    FontWeight.normal, blackColor, Alignment.centerLeft),
+                ManualHorizontalListview(objectList, 200.0, 200.0, 200.0),
+              ],
+            ),
           ),
         ),
       ),

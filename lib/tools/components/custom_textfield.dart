@@ -12,8 +12,6 @@ class CustomTextfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: textFieldWidth,
-      height: textFieldHeight,
       child: TextField(
         enabled: isEnabled,
         decoration: InputDecoration(hintText: textFieldLabel),

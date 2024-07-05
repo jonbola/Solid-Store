@@ -4,17 +4,25 @@ import 'package:eletronic_conponents_store/tools/functions/change_returnable_pag
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
-  const SigninPage({super.key});
+  final bool isDarkModeOn;
+  const SigninPage(this.isDarkModeOn, {super.key});
 
   @override
   State<SigninPage> createState() => _SigninPageState();
 }
 
 class _SigninPageState extends State<SigninPage> {
+  late bool darkMode;
   final nameFieldController = TextEditingController();
   final phoneFieldController = TextEditingController();
   final emailFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    darkMode = widget.isDarkModeOn;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -178,7 +186,8 @@ class _SigninPageState extends State<SigninPage> {
                       } else if (!emailFieldController.text.isEmailValidate()) {
                         return;
                       } else {
-                        changeReturnablePage(context, build, const LoginPage());
+                        changeReturnablePage(
+                            context, build, LoginPage(darkMode));
                       }
                     },
                     child: Container(
@@ -223,14 +232,11 @@ class _SigninPageState extends State<SigninPage> {
                         )),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
+                    onTap: () => changeReturnablePage(
+                      context,
+                      build,
+                      LoginPage(darkMode),
+                    ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       padding: const EdgeInsets.symmetric(horizontal: 30),

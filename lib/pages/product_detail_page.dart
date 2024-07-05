@@ -1,18 +1,29 @@
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final bool isLogin;
-  const ProductDetailPage(this.isLogin, {super.key});
+  final bool isDarkModeOn;
+  const ProductDetailPage(this.isLogin, this.isDarkModeOn, {super.key});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  late bool login;
+  late bool darkMode;
+  @override
+  void initState() {
+    super.initState();
+    login = widget.isLogin;
+    darkMode = widget.isDarkModeOn;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -57,14 +68,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     Container(
                       margin: const EdgeInsets.only(left: 90.0),
                       child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CartPage(),
-                            ),
-                          );
-                        },
+                        onPressed: () => changeReturnablePage(
+                          context,
+                          build,
+                          CartPage(darkMode),
+                        ),
                         style: const ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.blue),
                         ),
@@ -83,14 +91,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       height: 50.0,
                       width: 50.0,
                       child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const CartPage(),
-                            ),
-                          );
-                        },
+                        onPressed: () => changeReturnablePage(
+                          context,
+                          build,
+                          CartPage(darkMode),
+                        ),
                         icon:
                             Image.asset('resources/icons/ic_shopping_cart.png'),
                       ),
@@ -99,14 +104,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 )
               : Center(
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
-                        ),
-                      );
-                    },
+                    onPressed: () => changeReturnablePage(
+                      context,
+                      build,
+                      LoginPage(darkMode),
+                    ),
                     style: const ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.blue),
                     ),

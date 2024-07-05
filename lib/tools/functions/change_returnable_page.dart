@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-void changeReturnablePage(
+Function()? changeReturnablePage(
     BuildContext context, Function(BuildContext) build, Widget page) {
-  Navigator.push(context, MaterialPageRoute(builder: (build) => page));
+  return () =>
+      Navigator.push(context, MaterialPageRoute(builder: (build) => page));
 }

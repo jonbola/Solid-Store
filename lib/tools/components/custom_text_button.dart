@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class CustomTextButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
-  final Color color;
+  final Color buttonColor;
   final Widget textWidget;
   final Function()? function;
-  const CustomTextButton(this.buttonWidth, this.buttonHeight, this.color,
+  const CustomTextButton(this.buttonWidth, this.buttonHeight, this.buttonColor,
       this.textWidget, this.function,
       {super.key});
 
@@ -16,7 +16,9 @@ class CustomTextButton extends StatelessWidget {
       width: buttonWidth,
       height: buttonHeight,
       child: TextButton(
-        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(color)),
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(buttonColor),
+        ),
         onPressed: function,
         child: textWidget,
       ),

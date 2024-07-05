@@ -4,10 +4,10 @@ class CustomIconButton extends StatelessWidget {
   final double buttonWidth;
   final double buttonHeight;
   final AlignmentGeometry align;
-  final Function()? function;
   final Widget graphicWidget;
+  final Function()? function;
   const CustomIconButton(this.buttonWidth, this.buttonHeight, this.align,
-      this.function, this.graphicWidget,
+      this.graphicWidget, this.function,
       {super.key});
 
   @override

@@ -37,7 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   searchable_listview: ^2.14.0
   auto_animated: ^3.2.0
-  scroll_loop_auto_scroll: ^0.0.5
+  animated_custom_dropdown: ^3.1.1
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +86,7 @@ flutter:
   - resources/icons/ic_cancel.png
   - resources/icons/ic_plus.png
   - resources/icons/ic_minus.png
+  - resources/icons/ic_light_bulb.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

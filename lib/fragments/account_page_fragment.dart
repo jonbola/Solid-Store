@@ -5,24 +5,30 @@ import 'package:eletronic_conponents_store/tools/components/custom_icon_button.d
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text_button.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_textfield.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:eletronic_conponents_store/tools/values/object_values.dart';
 import 'package:flutter/material.dart';
 
 class AccountPageFragment extends StatefulWidget {
   final bool isLogin;
-  const AccountPageFragment(this.isLogin, {super.key});
+  final bool isDarkModeOn;
+  const AccountPageFragment(this.isLogin, this.isDarkModeOn, {super.key});
 
   @override
   State<AccountPageFragment> createState() => _AccountPageFragmentState();
 }
 
 class _AccountPageFragmentState extends State<AccountPageFragment> {
+  late bool login;
+  late bool darkMode;
   late bool isEnabled;
   late bool isVisible;
   @override
   void initState() {
     super.initState();
+    login = widget.isLogin;
+    darkMode = widget.isDarkModeOn;
     isEnabled = false;
     isVisible = false;
   }
@@ -30,7 +36,7 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: widget.isLogin
+      child: login
           ? Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -41,14 +47,15 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                         Visibility(
                           visible: isVisible,
                           child: CustomIconButton(
-                              70.0,
-                              70.0,
-                              Alignment.centerLeft,
-                              () => setState(() {
-                                    isVisible = false;
-                                    isEnabled = false;
-                                  }),
-                              Image.asset('resources/icons/ic_cancel.png')),
+                            70.0,
+                            70.0,
+                            Alignment.centerLeft,
+                            Image.asset('resources/icons/ic_cancel.png'),
+                            () => setState(() {
+                              isVisible = false;
+                              isEnabled = false;
+                            }),
+                          ),
                         ),
                         const Spacer(),
                         const CustomText('TÀI KHOẢN', 30.0, FontStyle.normal,
@@ -57,14 +64,15 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                         Visibility(
                           visible: isVisible,
                           child: CustomIconButton(
-                              70.0,
-                              70.0,
-                              Alignment.centerRight,
-                              () => setState(() {
-                                    isVisible = false;
-                                    isEnabled = false;
-                                  }),
-                              Image.asset('resources/icons/ic_check.png')),
+                            70.0,
+                            70.0,
+                            Alignment.centerRight,
+                            Image.asset('resources/icons/ic_check.png'),
+                            () => setState(() {
+                              isVisible = false;
+                              isEnabled = false;
+                            }),
+                          ),
                         ),
                       ],
                     ),
@@ -77,8 +85,8 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                           170.0,
                           170.0,
                           Alignment.center,
-                          null,
                           Image.asset('resources/images/img_logo.png'),
+                          null,
                         ),
                         const Spacer(),
                         SizedBox(
@@ -271,10 +279,10 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                       lightBlueColor,
                       const CustomText('Đăng xuất', 20.0, FontStyle.normal,
                           FontWeight.normal, whiteColor, Alignment.center),
-                      () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => const MainPage(false),
-                        ),
+                      () => changeReturnablePage(
+                        context,
+                        build,
+                        MainPage(false, darkMode),
                       ),
                     ),
                   ],
@@ -301,11 +309,10 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                     lightBlueColor,
                     const CustomText('Đăng nhập', 20.0, FontStyle.normal,
                         FontWeight.normal, whiteColor, Alignment.center),
-                    () => Navigator.push(
+                    () => changeReturnablePage(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ),
+                      build,
+                      LoginPage(darkMode),
                     ),
                   ),
                 ],

@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const MainPage(false),
-      home: const sss(),
+      home: const MainPage(false, true),
+      // home: const sss(),
     );
   }
 }

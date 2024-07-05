@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-void changeNonReturnablePage(
+Function()? changeNonReturnablePage(
     BuildContext context, Function(BuildContext) build, Widget page) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (build) => page),
-  );
+  return () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (build) => page),
+      );
 }

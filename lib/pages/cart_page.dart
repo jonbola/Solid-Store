@@ -1,17 +1,26 @@
 import 'package:eletronic_conponents_store/fragments/product_item_fragment.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final bool isDarkModeOn;
+  const CartPage(this.isDarkModeOn, {super.key});
 
   @override
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
+  late bool darkMode;
+  @override
+  void initState() {
+    super.initState();
+    darkMode = widget.isDarkModeOn;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,14 +77,11 @@ class _CartPageState extends State<CartPage> {
                       style: const ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(blueColor),
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainPage(true),
-                          ),
-                        );
-                      },
+                      onPressed: () => changeReturnablePage(
+                        context,
+                        build,
+                        MainPage(true, darkMode),
+                      ),
                       child: const CustomText(
                           'Tiếp tục mua sắm',
                           20.0,

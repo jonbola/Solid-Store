@@ -1,21 +1,25 @@
 import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:eletronic_conponents_store/pages/signin_page.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_non_returnable_page.dart';
 import 'package:flutter/material.dart';
 import 'package:eletronic_conponents_store/tools/extensions/string_validate.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final bool isDarkModeOn;
+  const LoginPage(this.isDarkModeOn, {super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late bool darkMode;
   final accountFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
+    darkMode = widget.isDarkModeOn;
   }
 
   @override
@@ -116,11 +120,10 @@ class _LoginPageState extends State<LoginPage> {
                         //     .isPasswordStrong()) {
                         //   return;
                       } else {
-                        Navigator.pushReplacement(
+                        changeNonReturnablePage(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainPage(true),
-                          ),
+                          build,
+                          MainPage(true, darkMode),
                         );
                       }
                     },
@@ -166,13 +169,11 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SigninPage(),
-                          ));
-                    },
+                    onTap: () => changeNonReturnablePage(
+                      context,
+                      build,
+                      SigninPage(darkMode),
+                    ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       padding: const EdgeInsets.symmetric(horizontal: 30),

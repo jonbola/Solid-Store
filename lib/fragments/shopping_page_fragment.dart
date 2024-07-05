@@ -1,21 +1,32 @@
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
+import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
+import 'package:eletronic_conponents_store/tools/components/manual_vertical_listview.dart';
+import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
+import 'package:eletronic_conponents_store/tools/functions/create_text_list.dart';
+import 'package:eletronic_conponents_store/tools/values/color_values.dart';
+import 'package:eletronic_conponents_store/tools/values/object_values.dart';
 import 'package:flutter/material.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 import 'package:eletronic_conponents_store/database/product_data.dart';
 
 class ShoppingPageFragment extends StatefulWidget {
   final bool isLogin;
-  const ShoppingPageFragment(this.isLogin, {super.key});
+  final bool isDarkModeOn;
+  const ShoppingPageFragment(this.isLogin, this.isDarkModeOn, {super.key});
 
   @override
   State<ShoppingPageFragment> createState() => _ShoppingPageFragmentState();
 }
 
 class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
+  late bool login;
+  late bool darkMode;
   final searchFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
+    login = widget.isLogin;
+    darkMode = widget.isDarkModeOn;
   }
 
   @override
@@ -31,17 +42,14 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
           ),
         ),
         actions: <Widget>[
-          widget.isLogin
+          login
               ? SizedBox(
                   child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CartPage(),
-                        ),
-                      );
-                    },
+                    onPressed: () => changeReturnablePage(
+                      context,
+                      build,
+                      CartPage(darkMode),
+                    ),
                     icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                   ),
                 )
@@ -52,49 +60,23 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
         width: 150.0,
         child: Column(
           children: <Widget>[
-            const Text(
+            const CustomText(
               'Loại sản phẩm',
-              style: TextStyle(fontSize: 20.0),
+              20.0,
+              FontStyle.normal,
+              FontWeight.bold,
+              blackColor,
+              Alignment.center,
             ),
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: const [
-                  TextButton(
-                    onPressed: null,
-                    child: Text('CPU'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('GPU'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('RAM'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('HDD'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('SSD'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Chuột'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Màn hình'),
-                  ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text('Vỏ case'),
-                  ),
-                ],
-              ),
-            ),
+            ManualVerticalListview(
+                createTextList(
+                  productTypeList,
+                  20.0,
+                  FontStyle.normal,
+                  FontWeight.normal,
+                  blackColor,
+                  Alignment.center,
+                ),),
           ],
         ),
       ),

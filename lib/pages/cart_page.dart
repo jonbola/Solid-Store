@@ -27,14 +27,14 @@ class _CartPageState extends State<CartPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: lightBlueColor,
-          title: const CustomText('GIỎ HÀNG', 30.0, FontStyle.normal,
+          title: CustomText('GIỎ HÀNG', 30.0, FontStyle.normal,
               FontWeight.bold, whiteColor, Alignment.center),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              const CustomText('Danh sách sản phẩm', 20.0, FontStyle.normal,
+              CustomText('Danh sách sản phẩm', 20.0, FontStyle.normal,
                   FontWeight.normal, blackColor, Alignment.centerLeft),
               Expanded(
                 child: ListView(
@@ -52,7 +52,7 @@ class _CartPageState extends State<CartPage> {
           height: 100.0,
           child: Column(
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerRight,
                 child: SizedBox(
                   width: 200.0,
@@ -74,7 +74,7 @@ class _CartPageState extends State<CartPage> {
                   Container(
                     margin: const EdgeInsets.only(left: 30.0),
                     child: TextButton(
-                      style: const ButtonStyle(
+                      style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(blueColor),
                       ),
                       onPressed: () => changeReturnablePage(
@@ -82,7 +82,7 @@ class _CartPageState extends State<CartPage> {
                         build,
                         MainPage(true, darkMode),
                       ),
-                      child: const CustomText(
+                      child: CustomText(
                           'Tiếp tục mua sắm',
                           20.0,
                           FontStyle.normal,
@@ -94,7 +94,7 @@ class _CartPageState extends State<CartPage> {
                   const SizedBox(
                     width: 20.0,
                   ),
-                  const TextButton(
+                  TextButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(blueColor),
                     ),

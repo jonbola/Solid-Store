@@ -1,5 +1,5 @@
 import 'package:eletronic_conponents_store/pages/main_page.dart';
-import 'package:eletronic_conponents_store/test.dart';
+import 'package:eletronic_conponents_store/test01.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MainPage(false, true),
-      // home: const sss(),
+      // home: const Test01(),
     );
   }
 }

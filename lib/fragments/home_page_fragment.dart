@@ -34,12 +34,12 @@ class _HomePageFragmentState extends State<HomePageFragment> {
     super.initState();
     login = widget.isLogin;
     visionStatus = widget.visionStatus;
-    var (color1, color2, color3) = setVisionColor(visionStatus);
-    mainColor = color1;
-    backgroundColor = color2;
-    textColor = color3;
+    final setColor = setVisionColor(visionStatus);
+    mainColor = setColor[0];
+    backgroundColor = setColor[1];
+    textColor = setColor[2];
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,23 +71,19 @@ class _HomePageFragmentState extends State<HomePageFragment> {
               height: 50.0,
               child: login
                   ? IconButton(
-                      onPressed: () {
-                        changeReturnablePage(
-                          context,
-                          build,
-                          CartPage(visionStatus),
-                        );
-                      },
+                      onPressed: changeReturnablePage(
+                        context,
+                        build,
+                        CartPage(visionStatus),
+                      ),
                       icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                     )
                   : IconButton(
-                      onPressed: () {
-                        changeReturnablePage(
-                          context,
-                          build,
-                          LoginPage(visionStatus),
-                        );
-                      },
+                      onPressed: changeReturnablePage(
+                        context,
+                        build,
+                        LoginPage(visionStatus),
+                      ),
                       icon: Image.asset('resources/icons/ic_exit.png'),
                     ),
             ),

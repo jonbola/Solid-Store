@@ -309,7 +309,7 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                     lightBlueColor,
                     const CustomText('Đăng nhập', 20.0, FontStyle.normal,
                         FontWeight.normal, whiteColor, Alignment.center),
-                    () => changeReturnablePage(
+                    changeReturnablePage(
                       context,
                       build,
                       LoginPage(darkMode),

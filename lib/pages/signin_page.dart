@@ -232,7 +232,7 @@ class _SigninPageState extends State<SigninPage> {
                         )),
                   ),
                   GestureDetector(
-                    onTap: () => changeReturnablePage(
+                    onTap: changeReturnablePage(
                       context,
                       build,
                       LoginPage(darkMode),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/shopping_page_fragment.dart';
@@ -27,10 +29,10 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     visionStatus = widget.visionStatus;
     login = widget.isLogin;
-    var (color1, color2, color3) = setVisionColor(visionStatus);
-    mainColor = color1;
-    backgroundColor = color2;
-    textColor = color3;
+    final setColor = setVisionColor(visionStatus);
+    mainColor = setColor[0];
+    backgroundColor = setColor[1];
+    textColor = setColor[2];
     currentPage = 0;
     pages = [
       HomePageFragment(login, visionStatus),
@@ -54,18 +56,24 @@ class _MainPageState extends State<MainPage> {
           children: pages,
         ),
         floatingActionButton: IconButton(
-          onPressed: () => setState(() {
-            var (status, color1, color2, color3) =
-                changeVisionColor(visionStatus);
-            visionStatus = status;
-            mainColor = color1;
-            backgroundColor = color2;
-            textColor = color3;
-          }),
-          icon: Image.asset(
-            'resources/icons/ic_light_bulb.png',
-            width: 50.0,
-            height: 50.0,
+          onPressed: () {
+            setState(() {
+              final changeColor = changeVisionColor(visionStatus);
+              visionStatus = changeColor[0];
+              mainColor = changeColor[1];
+              backgroundColor = changeColor[2];
+              textColor = changeColor[3];
+            });
+          },
+          icon: ClipOval(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0),
+              child: Image.asset(
+                'resources/icons/ic_light_bulb.png',
+                width: 50.0,
+                height: 50.0,
+              ),
+            ),
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -89,7 +97,6 @@ class _MainPageState extends State<MainPage> {
                 ),
                 label: 'Tìm kiếm'),
             BottomNavigationBarItem(
-              backgroundColor: Colors.blue,
               icon: Image.asset(
                 'resources/icons/ic_account.png',
                 width: 50.0,

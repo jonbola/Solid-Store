@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
+import 'package:eletronic_conponents_store/fragments/home_page_controller.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/shopping_page_fragment.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   final bool isLogin;
@@ -27,6 +29,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    
     visionStatus = widget.visionStatus;
     login = widget.isLogin;
     final setColor = setVisionColor(visionStatus);
@@ -35,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     textColor = setColor[2];
     currentPage = 0;
     pages = [
-      HomePageFragment(login, visionStatus),
+      HomePageFragment(login),
       ShoppingPageFragment(login, visionStatus),
       AccountPageFragment(login, visionStatus),
     ];
@@ -59,6 +62,7 @@ class _MainPageState extends State<MainPage> {
           onPressed: () {
             setState(() {
               final changeColor = changeVisionColor(visionStatus);
+              context.read<HomePageController>().visionStatus = changeColor[0];
               visionStatus = changeColor[0];
               mainColor = changeColor[1];
               backgroundColor = changeColor[2];
@@ -67,7 +71,7 @@ class _MainPageState extends State<MainPage> {
           },
           icon: ClipOval(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0,sigmaY: 10.0),
+              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
               child: Image.asset(
                 'resources/icons/ic_light_bulb.png',
                 width: 50.0,

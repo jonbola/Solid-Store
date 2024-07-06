@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:eletronic_conponents_store/tools/extensions/string_validate.dart';
 
 class LoginPage extends StatefulWidget {
-  final bool isDarkModeOn;
-  const LoginPage(this.isDarkModeOn, {super.key});
+  final bool visionStatus;
+  const LoginPage(this.visionStatus, {super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late bool darkMode;
+  late bool visionStatus;
   final accountFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
-    darkMode = widget.isDarkModeOn;
+    visionStatus = widget.visionStatus;
   }
 
   @override
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                         changeNonReturnablePage(
                           context,
                           build,
-                          MainPage(true, darkMode),
+                          MainPage(true, visionStatus),
                         );
                       }
                     },
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                               "Login",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 24,
+                                fontSize: 19,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: changeNonReturnablePage(
                       context,
                       build,
-                      SigninPage(darkMode),
+                      SigninPage(visionStatus),
                     ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           "Sign up",
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 19,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 
 class AccountPageFragment extends StatefulWidget {
   final bool isLogin;
-  final bool isDarkModeOn;
-  const AccountPageFragment(this.isLogin, this.isDarkModeOn, {super.key});
+  final bool visionStatus;
+  const AccountPageFragment(this.isLogin, this.visionStatus, {super.key});
 
   @override
   State<AccountPageFragment> createState() => _AccountPageFragmentState();
@@ -28,7 +28,7 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
   void initState() {
     super.initState();
     login = widget.isLogin;
-    darkMode = widget.isDarkModeOn;
+    darkMode = widget.visionStatus;
     isEnabled = false;
     isVisible = false;
   }

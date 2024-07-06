@@ -11,8 +11,8 @@ import 'package:eletronic_conponents_store/database/product_data.dart';
 
 class ShoppingPageFragment extends StatefulWidget {
   final bool isLogin;
-  final bool isDarkModeOn;
-  const ShoppingPageFragment(this.isLogin, this.isDarkModeOn, {super.key});
+  final bool visionStatus;
+  const ShoppingPageFragment(this.isLogin, this.visionStatus, {super.key});
 
   @override
   State<ShoppingPageFragment> createState() => _ShoppingPageFragmentState();
@@ -20,13 +20,13 @@ class ShoppingPageFragment extends StatefulWidget {
 
 class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
   late bool login;
-  late bool darkMode;
+  late bool visionStatus;
   final searchFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
     login = widget.isLogin;
-    darkMode = widget.isDarkModeOn;
+    visionStatus = widget.visionStatus;
   }
 
   @override
@@ -45,10 +45,10 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
           login
               ? SizedBox(
                   child: IconButton(
-                    onPressed: () => changeReturnablePage(
+                    onPressed: changeReturnablePage(
                       context,
                       build,
-                      CartPage(darkMode),
+                      CartPage(visionStatus),
                     ),
                     icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                   ),
@@ -69,14 +69,15 @@ class _ShoppingPageFragmentState extends State<ShoppingPageFragment> {
               Alignment.center,
             ),
             ManualVerticalListview(
-                createTextList(
-                  productTypeList,
-                  20.0,
-                  FontStyle.normal,
-                  FontWeight.normal,
-                  blackColor,
-                  Alignment.center,
-                ),),
+              createTextList(
+                productTypeList,
+                20.0,
+                FontStyle.normal,
+                FontWeight.normal,
+                blackColor,
+                Alignment.center,
+              ),
+            ),
           ],
         ),
       ),

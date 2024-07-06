@@ -4,15 +4,15 @@ import 'package:eletronic_conponents_store/tools/functions/change_returnable_pag
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
-  final bool isDarkModeOn;
-  const SigninPage(this.isDarkModeOn, {super.key});
+  final bool visionStatus;
+  const SigninPage(this.visionStatus, {super.key});
 
   @override
   State<SigninPage> createState() => _SigninPageState();
 }
 
 class _SigninPageState extends State<SigninPage> {
-  late bool darkMode;
+  late bool visionStatus;
   final nameFieldController = TextEditingController();
   final phoneFieldController = TextEditingController();
   final emailFieldController = TextEditingController();
@@ -20,7 +20,7 @@ class _SigninPageState extends State<SigninPage> {
   @override
   void initState() {
     super.initState();
-    darkMode = widget.isDarkModeOn;
+    visionStatus = widget.visionStatus;
   }
 
   @override
@@ -187,7 +187,10 @@ class _SigninPageState extends State<SigninPage> {
                         return;
                       } else {
                         changeReturnablePage(
-                            context, build, LoginPage(darkMode));
+                          context,
+                          build,
+                          LoginPage(visionStatus),
+                        );
                       }
                     },
                     child: Container(
@@ -235,7 +238,7 @@ class _SigninPageState extends State<SigninPage> {
                     onTap: changeReturnablePage(
                       context,
                       build,
-                      LoginPage(darkMode),
+                      LoginPage(visionStatus),
                     ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),

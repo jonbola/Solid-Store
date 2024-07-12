@@ -109,24 +109,25 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      if (accountFieldController.text.isEmpty ||
-                          passwordFieldController.text.isEmpty) {
-                        return;
-                      } else if (!accountFieldController.text
-                          .isEmailValidate()) {
-                        return;
-                        // } else if (!passwordFieldController.text
-                        //     .isPasswordStrong()) {
-                        //   return;
-                      } else {
-                        changeNonReturnablePage(
+                    onTap:changeNonReturnablePage(
                           context,
                           build,
                           MainPage(true, visionStatus),
-                        );
-                      }
-                    },
+                        ),
+                    //  () {
+                      // if (accountFieldController.text.isEmpty ||
+                      //     passwordFieldController.text.isEmpty) {
+                      //   return;
+                      // } else if (!accountFieldController.text
+                      //     .isEmailValidate()) {
+                      //   return;
+                      //   // } else if (!passwordFieldController.text
+                      //   //     .isPasswordStrong()) {
+                      //   //   return;
+                      // } else {
+                        
+                      // }
+                    // },
                     child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -172,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: changeNonReturnablePage(
                       context,
                       build,
-                      SigninPage(visionStatus),
+                      const SigninPage(),
                     ),
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),

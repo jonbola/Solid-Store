@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:eletronic_conponents_store/fragments/home_page_controller.dart';
+import 'package:eletronic_conponents_store/controllers/dark_mode_controller.dart';
+import 'package:eletronic_conponents_store/controllers/language_option_controller.dart';
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
@@ -11,7 +12,9 @@ import 'package:eletronic_conponents_store/tools/functions/create_image_asset_li
 import 'package:eletronic_conponents_store/tools/functions/create_textbutton_list.dart';
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
+import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
 import 'package:eletronic_conponents_store/tools/values/object_values.dart';
+import 'package:eletronic_conponents_store/tools/values/vn_string_values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,27 +28,23 @@ class HomePageFragment extends StatefulWidget {
 
 class _HomePageFragmentState extends State<HomePageFragment> {
   late bool login;
-  late Color mainColor;
-  late Color backgroundColor;
-  late Color textColor;
+  late DarkModeController darkModeController;
   late MainPage mainPage;
+
   @override
   void initState() {
     super.initState();
     login = widget.isLogin;
-    final controller = context.read<HomePageController>();
-    final setColor = setVisionColor(controller.visionStatus);
-    mainColor = setColor[0];
-    backgroundColor = setColor[1];
-    textColor = setColor[2];
+    darkModeController = context.read<DarkModeController>();
   }
 
-  Widget body() {
-    return Consumer<HomePageController>(
-      builder: (context, value, child) => SafeArea(
+  @override
+  Widget build(BuildContext context) {
+    return Consumer2<DarkModeController, LanguageOptionController>(
+      builder: (context, darkMode, language, child) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: mainColor,
+            backgroundColor: setVisionColor(darkMode.status)[0],
             toolbarHeight: 100.0,
             titleSpacing: -10.0,
             title: Row(
@@ -74,7 +73,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                         onPressed: changeReturnablePage(
                           context,
                           build,
-                          CartPage(value.visionStatus),
+                          CartPage(darkMode.status),
                         ),
                         icon:
                             Image.asset('resources/icons/ic_shopping_cart.png'),
@@ -83,7 +82,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                         onPressed: changeReturnablePage(
                           context,
                           build,
-                          LoginPage(value.visionStatus),
+                          LoginPage(darkMode.status),
                         ),
                         icon: Image.asset('resources/icons/ic_exit.png'),
                       ),
@@ -91,7 +90,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
             ],
           ),
           drawer: Drawer(
-            backgroundColor: value.visionStatus == true ? whiteColor : Colors.black,
+            backgroundColor: whiteColor,
             width: 150.0,
             child: Column(
               children: <Widget>[
@@ -105,7 +104,9 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                 ),
                 ManualVerticalListview(
                   createTextButtonList(
-                      productTypeList,
+                      language.language == 'VN'
+                          ? vnProductTypeList
+                          : enProductTypeList,
                       100.0,
                       50.0,
                       lightBlueColor,
@@ -124,16 +125,16 @@ class _HomePageFragmentState extends State<HomePageFragment> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const CustomText(
+                  CustomText(
                     'SẢN PHẨM MỚI',
                     30.0,
                     FontStyle.normal,
                     FontWeight.bold,
-                    blackColor,
+                    setVisionColor(darkMode.status)[2],
                     Alignment.centerLeft,
                   ),
                   Card(
-                    color: mainColor,
+                    color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
                         createImageAssetList(productTestDataList, 300.0, 300.0),
                         300.0,
@@ -147,16 +148,16 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  const CustomText(
+                  CustomText(
                     'Sản phẩm bán chạy',
                     20.0,
                     FontStyle.normal,
                     FontWeight.normal,
-                    blackColor,
+                    setVisionColor(darkMode.status)[2],
                     Alignment.centerLeft,
                   ),
                   Card(
-                    color: mainColor,
+                    color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
                         createImageAssetList(productTestDataList, 200.0, 200.0),
                         200.0,
@@ -167,16 +168,16 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                         SwiperLayout.STACK,
                         200.0),
                   ),
-                  const CustomText(
+                  CustomText(
                     'Khuyến mãi',
                     20.0,
                     FontStyle.normal,
                     FontWeight.normal,
-                    blackColor,
+                    setVisionColor(darkMode.status)[2],
                     Alignment.centerLeft,
                   ),
                   Card(
-                    color: mainColor,
+                    color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
                         createImageAssetList(productTestDataList, 200.0, 200.0),
                         200.0,
@@ -194,10 +195,5 @@ class _HomePageFragmentState extends State<HomePageFragment> {
         ),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return body();
   }
 }

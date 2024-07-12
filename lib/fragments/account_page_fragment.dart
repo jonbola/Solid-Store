@@ -1,3 +1,5 @@
+import 'package:eletronic_conponents_store/controllers/dark_mode_controller.dart';
+import 'package:eletronic_conponents_store/controllers/language_option_controller.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_dropdown_menu.dart';
@@ -6,14 +8,16 @@ import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text_button.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_textfield.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
+import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
-import 'package:eletronic_conponents_store/tools/values/object_values.dart';
+import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
+import 'package:eletronic_conponents_store/tools/values/vn_string_values.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AccountPageFragment extends StatefulWidget {
   final bool isLogin;
-  final bool visionStatus;
-  const AccountPageFragment(this.isLogin, this.visionStatus, {super.key});
+  const AccountPageFragment(this.isLogin, {super.key});
 
   @override
   State<AccountPageFragment> createState() => _AccountPageFragmentState();
@@ -21,22 +25,23 @@ class AccountPageFragment extends StatefulWidget {
 
 class _AccountPageFragmentState extends State<AccountPageFragment> {
   late bool login;
-  late bool darkMode;
   late bool isEnabled;
   late bool isVisible;
+  late DarkModeController darkModeController;
+
   @override
   void initState() {
     super.initState();
     login = widget.isLogin;
-    darkMode = widget.visionStatus;
     isEnabled = false;
     isVisible = false;
+    darkModeController = context.read<DarkModeController>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: login
+    return Consumer2<DarkModeController, LanguageOptionController>(
+      builder: (context, darkMode, language, child) => login
           ? Scaffold(
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -58,8 +63,13 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                           ),
                         ),
                         const Spacer(),
-                        const CustomText('TÀI KHOẢN', 30.0, FontStyle.normal,
-                            FontWeight.bold, blackColor, Alignment.center),
+                        CustomText(
+                            'TÀI KHOẢN',
+                            30.0,
+                            FontStyle.normal,
+                            FontWeight.bold,
+                            setVisionColor(darkMode.status)[2],
+                            Alignment.center),
                         const Spacer(),
                         Visibility(
                           visible: isVisible,
@@ -94,12 +104,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              const CustomText(
+                              CustomText(
                                   'Tên tài khoản',
                                   20.0,
                                   FontStyle.normal,
                                   FontWeight.bold,
-                                  blackColor,
+                                  setVisionColor(darkMode.status)[2],
                                   Alignment.centerLeft),
                               CustomTextfield(
                                   200.0, 50.0, isEnabled, 'Tên tài khoản'),
@@ -120,12 +130,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Email',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomTextfield(
                                       200.0, 50.0, isEnabled, 'Email'),
@@ -140,12 +150,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Số điện thoại',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomTextfield(
                                       200.0, 50.0, isEnabled, 'Số điện thoại'),
@@ -168,12 +178,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Họ',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomTextfield(200.0, 50.0, isEnabled, 'Họ'),
                                 ],
@@ -187,12 +197,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Tên',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomTextfield(
                                       200.0, 50.0, isEnabled, 'Tên'),
@@ -215,15 +225,19 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Giới tính',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomDropdownMenu(
-                                      isEnabled, genderList, 150.0),
+                                      isEnabled,
+                                      language.language == 'VN'
+                                          ? vnGenderList
+                                          : enGenderList,
+                                      150.0),
                                 ],
                               ),
                             ),
@@ -235,15 +249,19 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  const CustomText(
+                                  CustomText(
                                       'Quốc tịch',
                                       20.0,
                                       FontStyle.normal,
                                       FontWeight.bold,
-                                      blackColor,
+                                      setVisionColor(darkMode.status)[2],
                                       Alignment.centerLeft),
                                   CustomDropdownMenu(
-                                      isEnabled, countryList, 250.0),
+                                      isEnabled,
+                                      language.language == 'VN'
+                                          ? vnCountryList
+                                          : enCountryList,
+                                      250.0),
                                 ],
                               ),
                             ),
@@ -257,7 +275,7 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                     CustomTextButton(
                       250.0,
                       50.0,
-                      lightBlueColor,
+                      setVisionColor(darkMode.status)[0],
                       const CustomText(
                           'Thay đổi thông tin',
                           20.0,
@@ -276,13 +294,13 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                     CustomTextButton(
                       150.0,
                       50.0,
-                      lightBlueColor,
+                      setVisionColor(darkMode.status)[0],
                       const CustomText('Đăng xuất', 20.0, FontStyle.normal,
                           FontWeight.normal, whiteColor, Alignment.center),
-                      () => changeReturnablePage(
+                      changeReturnablePage(
                         context,
                         build,
-                        MainPage(false, darkMode),
+                        MainPage(false, darkMode.status),
                       ),
                     ),
                   ],
@@ -293,12 +311,12 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const CustomText(
+                  CustomText(
                       'Đăng nhập để sử dụng',
                       20.0,
                       FontStyle.normal,
                       FontWeight.normal,
-                      blackColor,
+                      setVisionColor(darkMode.status)[2],
                       Alignment.center),
                   const SizedBox(
                     height: 20.0,
@@ -306,13 +324,13 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
                   CustomTextButton(
                     150.0,
                     50.0,
-                    lightBlueColor,
+                    setVisionColor(darkMode.status)[0],
                     const CustomText('Đăng nhập', 20.0, FontStyle.normal,
                         FontWeight.normal, whiteColor, Alignment.center),
                     changeReturnablePage(
                       context,
                       build,
-                      LoginPage(darkMode),
+                      LoginPage(darkMode.status),
                     ),
                   ),
                 ],

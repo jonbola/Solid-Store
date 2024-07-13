@@ -4,7 +4,7 @@ import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/manual_vertical_listview.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_returnable_page.dart';
-import 'package:eletronic_conponents_store/tools/functions/create_text_list.dart';
+import 'package:eletronic_conponents_store/tools/functions/create_textbutton_list.dart';
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
@@ -36,15 +36,18 @@ class _SearchPageFragmentState extends State<SearchPageFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<DarkModeController,LanguageOptionController>(
-      builder: (context, darkMode,language, child) => Scaffold(
+    return Consumer2<DarkModeController, LanguageOptionController>(
+      builder: (context, darkMode, language, child) => Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: true,
+          iconTheme: const IconThemeData(color: whiteColor),
           backgroundColor: setVisionColor(darkMode.status)[0],
-          title: const Align(
+          title: Align(
             alignment: Alignment.center,
-            child: CustomText('SHOPPING', 30.0, FontStyle.normal,
-                FontWeight.bold, whiteColor, Alignment.center),
+            child: Container(
+              margin: const EdgeInsets.only(right: 40.0),
+              child: const CustomText('SHOPPING', 30.0, FontStyle.normal,
+                  FontWeight.bold, whiteColor, Alignment.center),
+            ),
           ),
           actions: <Widget>[
             login
@@ -62,26 +65,32 @@ class _SearchPageFragmentState extends State<SearchPageFragment> {
           ],
         ),
         drawer: Drawer(
+          backgroundColor: setVisionColor(darkMode.status)[0],
           width: 150.0,
           child: Column(
             children: <Widget>[
-              const CustomText(
-                'Loại sản phẩm',
+              CustomText(
+                language.language == 'VN' ? 'Loại sản phẩm' : 'Product type',
                 20.0,
                 FontStyle.normal,
                 FontWeight.bold,
-                blackColor,
+                whiteColor,
                 Alignment.center,
               ),
               ManualVerticalListview(
-                createTextList(
-                  language.language=='VN'?vnProductTypeList:enProductTypeList,
-                  20.0,
-                  FontStyle.normal,
-                  FontWeight.normal,
-                  blackColor,
-                  Alignment.center,
-                ),
+                createTextButtonList(
+                    language.language == 'VN'
+                        ? vnProductTypeList
+                        : enProductTypeList,
+                    100.0,
+                    50.0,
+                    whiteColor,
+                    15.0,
+                    FontStyle.normal,
+                    FontWeight.normal,
+                    blackColor,
+                    Alignment.center,
+                    null),
               ),
             ],
           ),
@@ -91,7 +100,9 @@ class _SearchPageFragmentState extends State<SearchPageFragment> {
           child: SearchableList<Product>(
             initialList: productList,
             inputDecoration: InputDecoration(
-              labelText: "Tìm kiếm sản phẩm",
+              labelText: language.language == 'VN'
+                  ? 'Tìm kiếm sản phẩm'
+                  : 'Look for products',
               labelStyle: TextStyle(color: setVisionColor(darkMode.status)[2]),
               fillColor: Colors.white,
               focusedBorder: OutlineInputBorder(

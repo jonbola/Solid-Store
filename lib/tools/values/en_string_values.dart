@@ -215,7 +215,7 @@ final List<String> enProductTypeList = <String>[
   'SSD',
   'HDD',
   'Screen',
-  'Electric Mouse'
+  'Mouse'
 ];
 
 final List<String> enBottomButtonLabelList = <String>[

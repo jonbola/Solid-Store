@@ -14,7 +14,6 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
-  late bool visionStatus;
   final nameFieldController = TextEditingController();
   final phoneFieldController = TextEditingController();
   final emailFieldController = TextEditingController();
@@ -29,7 +28,7 @@ class _SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DarkModeController>(builder: (context, value, child) =>  SafeArea(
+    return Consumer<DarkModeController>(builder: (context, darkMode, child) =>  SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(
             child: Column(
@@ -48,7 +47,7 @@ class _SigninPageState extends State<SigninPage> {
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
-                    color: setVisionColor(value.status)[2],
+                    color: setVisionColor(darkMode.status)[2],
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -194,7 +193,7 @@ class _SigninPageState extends State<SigninPage> {
                           changeReturnablePage(
                             context,
                             build,
-                            LoginPage(visionStatus),
+                            LoginPage(darkMode.status),
                           );
                         }
                       },
@@ -243,7 +242,7 @@ class _SigninPageState extends State<SigninPage> {
                       onTap: changeReturnablePage(
                         context,
                         build,
-                        LoginPage(visionStatus),
+                        LoginPage(darkMode.status),
                       ),
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),

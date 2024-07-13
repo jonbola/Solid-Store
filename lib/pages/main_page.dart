@@ -1,12 +1,9 @@
-import 'dart:ui';
-
 import 'package:eletronic_conponents_store/controllers/dark_mode_controller.dart';
 import 'package:eletronic_conponents_store/controllers/language_option_controller.dart';
 import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/search_page_fragment.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
-import 'package:eletronic_conponents_store/tools/components/custom_text_button.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_language.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
@@ -66,50 +63,37 @@ class _MainPageState extends State<MainPage> {
             index: currentPage,
             children: pages,
           ),
-          floatingActionButton: Stack(
+          floatingActionButton: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Container(
-                  margin: const EdgeInsets.only(left: 30.0),
-                  child: CustomTextButton(
-                    55.0,
-                    55.0,
-                    whiteColor,
-                    CustomText(languageOption, 20.0, FontStyle.normal,
-                        FontWeight.normal, blackColor, Alignment.center),
-                    () {
-                      setState(() {
-                        final changeLanguage = changeLanguageOption(languageOption);
-                        context.read<LanguageOptionController>().languageOption =
-                            changeLanguage;
-                        languageOption = changeLanguage;
-                      });
-                    },
-                  ),
-                ),
+              FloatingActionButton(
+                heroTag: null,
+                backgroundColor: whiteColor,
+                onPressed: () => setState(() {
+                  final changeLanguage = changeLanguageOption(languageOption);
+                  context.read<LanguageOptionController>().languageOption =
+                      changeLanguage;
+                  languageOption = changeLanguage;
+                }),
+                child: CustomText(language.language, 20.0, FontStyle.normal,
+                    FontWeight.normal, blackColor, Alignment.center),
               ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      final changeColor = changeVisionColor(darkMode);
-                      context.read<DarkModeController>().darkModeOn =
-                          changeColor[0];
-                      darkMode = changeColor[0];
-                    });
-                  },
-                  icon: ClipOval(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                      child: Image.asset(
-                        'resources/icons/ic_light_bulb.png',
-                        width: 50.0,
-                        height: 50.0,
-                      ),
-                    ),
-                  ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              FloatingActionButton(
+                heroTag: null,
+                backgroundColor: whiteColor,
+                onPressed: () => setState(() {
+                  final changeColor = changeVisionColor(darkMode);
+                  context.read<DarkModeController>().darkModeOn =
+                      changeColor[0];
+                  darkMode = changeColor[0];
+                }),
+                child: Image.asset(
+                  'resources/icons/ic_light_bulb.png',
+                  width: 50.0,
+                  height: 50.0,
                 ),
               ),
             ],
@@ -118,6 +102,8 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: setVisionColor(mode.status)[0],
             currentIndex: currentPage,
             onTap: changePageFragment,
+            unselectedItemColor: whiteColor,
+            selectedItemColor: whiteColor,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Image.asset(

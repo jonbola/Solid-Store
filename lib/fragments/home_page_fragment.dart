@@ -44,6 +44,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
       builder: (context, darkMode, language, child) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            iconTheme: const IconThemeData(color: whiteColor),
             backgroundColor: setVisionColor(darkMode.status)[0],
             toolbarHeight: 100.0,
             titleSpacing: -10.0,
@@ -84,22 +85,22 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                           build,
                           LoginPage(darkMode.status),
                         ),
-                        icon: Image.asset('resources/icons/ic_exit.png'),
+                        icon: Image.asset('resources/icons/ic_login.png'),
                       ),
               ),
             ],
           ),
           drawer: Drawer(
-            backgroundColor: whiteColor,
+            backgroundColor: setVisionColor(darkMode.status)[0],
             width: 150.0,
             child: Column(
               children: <Widget>[
-                const CustomText(
-                  'Loại sản phẩm',
+                CustomText(
+                  language.language == 'VN' ? 'Loại sản phẩm' : 'Product type',
                   20.0,
                   FontStyle.normal,
                   FontWeight.bold,
-                  blackColor,
+                  whiteColor,
                   Alignment.center,
                 ),
                 ManualVerticalListview(
@@ -109,7 +110,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                           : enProductTypeList,
                       100.0,
                       50.0,
-                      lightBlueColor,
+                      whiteColor,
                       15.0,
                       FontStyle.normal,
                       FontWeight.normal,
@@ -126,7 +127,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
               child: Column(
                 children: <Widget>[
                   CustomText(
-                    'SẢN PHẨM MỚI',
+                    language.language == 'VN' ? 'SẢN PHẨM MỚI' : 'NEW PRODUCT',
                     30.0,
                     FontStyle.normal,
                     FontWeight.bold,
@@ -149,7 +150,9 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                     height: 20.0,
                   ),
                   CustomText(
-                    'Sản phẩm bán chạy',
+                    language.language == 'VN'
+                        ? 'Sản phẩm bán chạy'
+                        : 'Hot sale',
                     20.0,
                     FontStyle.normal,
                     FontWeight.normal,
@@ -169,7 +172,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                         200.0),
                   ),
                   CustomText(
-                    'Khuyến mãi',
+                    language.language == 'VN' ? 'Khuyến mãi' : 'Hot deal',
                     20.0,
                     FontStyle.normal,
                     FontWeight.normal,

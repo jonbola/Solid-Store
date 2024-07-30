@@ -4,6 +4,7 @@ import 'package:eletronic_conponents_store/controllers/language_option_controlle
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
 import 'package:eletronic_conponents_store/pages/login_page.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
+import 'package:eletronic_conponents_store/pages/product_detail_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_horizontal_listview.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/manual_vertical_listview.dart';
@@ -13,7 +14,7 @@ import 'package:eletronic_conponents_store/tools/functions/create_textbutton_lis
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
-import 'package:eletronic_conponents_store/tools/values/object_values.dart';
+import 'package:eletronic_conponents_store/tools/values/product_image_values.dart';
 import 'package:eletronic_conponents_store/tools/values/vn_string_values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -137,14 +138,21 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                        createImageAssetList(productTestDataList, 300.0, 300.0),
-                        300.0,
-                        AxisDirection.left,
-                        true,
-                        true,
-                        500,
-                        SwiperLayout.STACK,
-                        300.0),
+                      createImageAssetList(productTestDataList, 300.0, 300.0),
+                      300.0,
+                      AxisDirection.left,
+                      true,
+                      true,
+                      500,
+                      SwiperLayout.STACK,
+                      300.0,
+                      changeReturnableItemPage(
+                        1,
+                        context,
+                        build,
+                        ProductDetailPage(login, darkMode.status),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -162,14 +170,21 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                        createImageAssetList(productTestDataList, 200.0, 200.0),
-                        200.0,
-                        AxisDirection.left,
-                        true,
-                        true,
-                        500,
-                        SwiperLayout.STACK,
-                        200.0),
+                      createImageAssetList(productTestDataList, 200.0, 200.0),
+                      200.0,
+                      AxisDirection.left,
+                      true,
+                      true,
+                      500,
+                      SwiperLayout.STACK,
+                      200.0,
+                      changeReturnableItemPage(
+                        1,
+                        context,
+                        build,
+                        ProductDetailPage(login, darkMode.status),
+                      ),
+                    ),
                   ),
                   CustomText(
                     language.language == 'VN' ? 'Khuyến mãi' : 'Hot deal',
@@ -182,14 +197,21 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                        createImageAssetList(productTestDataList, 200.0, 200.0),
-                        200.0,
-                        AxisDirection.left,
-                        true,
-                        true,
-                        500,
-                        SwiperLayout.STACK,
-                        200.0),
+                      createImageAssetList(productTestDataList, 200.0, 200.0),
+                      200.0,
+                      AxisDirection.left,
+                      true,
+                      true,
+                      500,
+                      SwiperLayout.STACK,
+                      200.0,
+                      changeReturnableItemPage(
+                        1,
+                        context,
+                        build,
+                        ProductDetailPage(login, darkMode.status),
+                      ),
+                    ),
                   ),
                 ],
               ),

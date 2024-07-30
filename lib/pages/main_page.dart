@@ -111,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                   width: 50.0,
                   height: 50.0,
                 ),
-                label: 'Trang chủ',
+                label: language.language == 'VN' ? 'Trang chủ' : 'Home',
               ),
               BottomNavigationBarItem(
                   icon: Image.asset(
@@ -119,14 +119,14 @@ class _MainPageState extends State<MainPage> {
                     width: 50.0,
                     height: 50.0,
                   ),
-                  label: 'Tìm kiếm'),
+                  label: language.language == 'VN' ? 'Tìm kiếm' : 'Search'),
               BottomNavigationBarItem(
                 icon: Image.asset(
                   'resources/icons/ic_account.png',
                   width: 50.0,
                   height: 50.0,
                 ),
-                label: 'Tài khoản',
+                label: language.language == 'VN' ? 'Tài khoản' : 'Account',
               ),
             ],
           ),

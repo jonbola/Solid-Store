@@ -10,6 +10,7 @@ class CustomHorizontalListview extends StatelessWidget {
   final int breakDuration;
   final SwiperLayout layoutType;
   final double itemWidth;
+  final Function(int)? function;
   const CustomHorizontalListview(
       this.widgetList,
       this.listHeight,
@@ -19,6 +20,7 @@ class CustomHorizontalListview extends StatelessWidget {
       this.breakDuration,
       this.layoutType,
       this.itemWidth,
+      this.function,
       {super.key});
 
   @override
@@ -26,6 +28,7 @@ class CustomHorizontalListview extends StatelessWidget {
     return SizedBox(
       height: listHeight,
       child: Swiper(
+        onTap: function,
         scrollDirection: Axis.horizontal,
         axisDirection: scrollDirection,
         loop: isLoop,

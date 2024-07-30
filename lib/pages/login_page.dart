@@ -2,24 +2,23 @@ import 'package:eletronic_conponents_store/pages/main_page.dart';
 import 'package:eletronic_conponents_store/pages/signin_page.dart';
 import 'package:eletronic_conponents_store/tools/functions/change_non_returnable_page.dart';
 import 'package:flutter/material.dart';
-import 'package:eletronic_conponents_store/tools/extensions/string_validate.dart';
 
 class LoginPage extends StatefulWidget {
-  final bool visionStatus;
-  const LoginPage(this.visionStatus, {super.key});
+  final bool darkMode;
+  const LoginPage(this.darkMode, {super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late bool visionStatus;
+  late bool darkMode;
   final accountFieldController = TextEditingController();
   final passwordFieldController = TextEditingController();
   @override
   void initState() {
     super.initState();
-    visionStatus = widget.visionStatus;
+    darkMode = widget.darkMode;
   }
 
   @override
@@ -109,25 +108,11 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap:changeNonReturnablePage(
-                          context,
-                          build,
-                          MainPage(true, visionStatus),
-                        ),
-                    //  () {
-                      // if (accountFieldController.text.isEmpty ||
-                      //     passwordFieldController.text.isEmpty) {
-                      //   return;
-                      // } else if (!accountFieldController.text
-                      //     .isEmailValidate()) {
-                      //   return;
-                      //   // } else if (!passwordFieldController.text
-                      //   //     .isPasswordStrong()) {
-                      //   //   return;
-                      // } else {
-                        
-                      // }
-                    // },
+                    onTap: changeNonReturnablePage(
+                      context,
+                      build,
+                      MainPage(true, darkMode),
+                    ),
                     child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
                         padding: const EdgeInsets.symmetric(horizontal: 15),

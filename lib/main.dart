@@ -24,11 +24,11 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<DarkModeController>(
-        builder: (context, value, child) => MaterialApp(
+        builder: (context, darkMode, child) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Solid Electronic',
           theme: ThemeData(
-              scaffoldBackgroundColor: setVisionColor(value.status)[1]),
+              scaffoldBackgroundColor: setVisionColor(darkMode.status)[1]),
           home: const MainPage(false, false),
         ),
       ),

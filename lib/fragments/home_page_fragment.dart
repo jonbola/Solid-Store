@@ -2,9 +2,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:eletronic_conponents_store/controllers/dark_mode_controller.dart';
 import 'package:eletronic_conponents_store/controllers/language_option_controller.dart';
 import 'package:eletronic_conponents_store/pages/cart_page.dart';
-import 'package:eletronic_conponents_store/pages/login_page.dart';
+import 'package:eletronic_conponents_store/pages/Login/login_page.dart';
 import 'package:eletronic_conponents_store/pages/main_page.dart';
-import 'package:eletronic_conponents_store/pages/product_detail_page.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_horizontal_listview.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
 import 'package:eletronic_conponents_store/tools/components/manual_vertical_listview.dart';
@@ -13,11 +12,11 @@ import 'package:eletronic_conponents_store/tools/functions/create_image_asset_li
 import 'package:eletronic_conponents_store/tools/functions/create_textbutton_list.dart';
 import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart';
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
-import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
-import 'package:eletronic_conponents_store/tools/values/product_image_values.dart';
-import 'package:eletronic_conponents_store/tools/values/vn_string_values.dart';
+import 'package:eletronic_conponents_store/tools/values/object_values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:eletronic_conponents_store/database/helper/db_helper.dart'; 
+import 'package:eletronic_conponents_store/database/model/category.dart'; 
 
 class HomePageFragment extends StatefulWidget {
   final bool isLogin;
@@ -30,6 +29,7 @@ class HomePageFragment extends StatefulWidget {
 class _HomePageFragmentState extends State<HomePageFragment> {
   late bool login;
   late DarkModeController darkModeController;
+  late DatabaseHelper dataHelper; // Initialize DataHelper
   late MainPage mainPage;
 
   @override
@@ -37,6 +37,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
     super.initState();
     login = widget.isLogin;
     darkModeController = context.read<DarkModeController>();
+    dataHelper = DatabaseHelper(); // Initialize DataHelper
   }
 
   @override
@@ -53,8 +54,8 @@ class _HomePageFragmentState extends State<HomePageFragment> {
               children: <Widget>[
                 Image.asset(
                   'resources/images/img_logo.png',
-                  height: 70.0,
-                  width: 70.0,
+                  height: 40.0,
+                  width: 50.0,
                 ),
                 const CustomText(
                   'SOLID ELECTRONIC',
@@ -72,16 +73,15 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                 height: 50.0,
                 child: login
                     ? IconButton(
-                        onPressed: changeReturnablePage(
+                        onPressed: () => changeReturnablePage(
                           context,
                           build,
                           CartPage(darkMode.status),
                         ),
-                        icon:
-                            Image.asset('resources/icons/ic_shopping_cart.png'),
+                        icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                       )
                     : IconButton(
-                        onPressed: changeReturnablePage(
+                        onPressed: () => changeReturnablePage(
                           context,
                           build,
                           LoginPage(darkMode.status),
@@ -104,20 +104,34 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   whiteColor,
                   Alignment.center,
                 ),
-                ManualVerticalListview(
-                  createTextButtonList(
-                      language.language == 'VN'
-                          ? vnProductTypeList
-                          : enProductTypeList,
-                      100.0,
-                      50.0,
-                      whiteColor,
-                      15.0,
-                      FontStyle.normal,
-                      FontWeight.normal,
-                      blackColor,
-                      Alignment.center,
-                      null),
+                Expanded(
+                  child: FutureBuilder<List<CategoryModel>>(
+                    future: dataHelper.getCategories(), // Fetch categories from local database
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Center(child: Text('No categories found'));
+                      } else {
+                        return ManualVerticalListview(
+                          createTextButtonList(
+                            snapshot.data!.map((category) => category.categoryName).toList(),
+                            100.0,
+                            50.0,
+                            whiteColor,
+                            15.0,
+                            FontStyle.normal,
+                            FontWeight.normal,
+                            blackColor,
+                            Alignment.center,
+                            null,
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ],
             ),
@@ -138,21 +152,14 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                      createImageAssetList(productTestDataList, 300.0, 300.0),
-                      300.0,
-                      AxisDirection.left,
-                      true,
-                      true,
-                      500,
-                      SwiperLayout.STACK,
-                      300.0,
-                      changeReturnableItemPage(
-                        1,
-                        context,
-                        build,
-                        ProductDetailPage(login, darkMode.status),
-                      ),
-                    ),
+                        createImageAssetList(productTestDataList, 300.0, 300.0),
+                        300.0,
+                        AxisDirection.left,
+                        true,
+                        true,
+                        500,
+                        SwiperLayout.STACK,
+                        300.0),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -170,21 +177,14 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                      createImageAssetList(productTestDataList, 200.0, 200.0),
-                      200.0,
-                      AxisDirection.left,
-                      true,
-                      true,
-                      500,
-                      SwiperLayout.STACK,
-                      200.0,
-                      changeReturnableItemPage(
-                        1,
-                        context,
-                        build,
-                        ProductDetailPage(login, darkMode.status),
-                      ),
-                    ),
+                        createImageAssetList(productTestDataList, 200.0, 200.0),
+                        200.0,
+                        AxisDirection.left,
+                        true,
+                        true,
+                        500,
+                        SwiperLayout.STACK,
+                        200.0),
                   ),
                   CustomText(
                     language.language == 'VN' ? 'Khuyến mãi' : 'Hot deal',
@@ -197,21 +197,14 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                   Card(
                     color: setVisionColor(darkMode.status)[0],
                     child: CustomHorizontalListview(
-                      createImageAssetList(productTestDataList, 200.0, 200.0),
-                      200.0,
-                      AxisDirection.left,
-                      true,
-                      true,
-                      500,
-                      SwiperLayout.STACK,
-                      200.0,
-                      changeReturnableItemPage(
-                        1,
-                        context,
-                        build,
-                        ProductDetailPage(login, darkMode.status),
-                      ),
-                    ),
+                        createImageAssetList(productTestDataList, 200.0, 200.0),
+                        200.0,
+                        AxisDirection.left,
+                        true,
+                        true,
+                        500,
+                        SwiperLayout.STACK,
+                        200.0),
                   ),
                 ],
               ),

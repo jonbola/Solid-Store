@@ -17,7 +17,7 @@ class CustomTextButton extends StatelessWidget {
       height: buttonHeight,
       child: TextButton(
         style: ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(buttonColor),
+          backgroundColor: MaterialStatePropertyAll(buttonColor),
         ),
         onPressed: function,
         child: textWidget,

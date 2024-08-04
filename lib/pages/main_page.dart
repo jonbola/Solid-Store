@@ -1,6 +1,6 @@
 import 'package:eletronic_conponents_store/controllers/dark_mode_controller.dart';
 import 'package:eletronic_conponents_store/controllers/language_option_controller.dart';
-import 'package:eletronic_conponents_store/fragments/account_page_fragment.dart';
+import 'package:eletronic_conponents_store/fragments/account/account_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/home_page_fragment.dart';
 import 'package:eletronic_conponents_store/fragments/search_page_fragment.dart';
 import 'package:eletronic_conponents_store/tools/components/custom_text.dart';
@@ -10,7 +10,6 @@ import 'package:eletronic_conponents_store/tools/functions/set_vision_color.dart
 import 'package:eletronic_conponents_store/tools/values/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 class MainPage extends StatefulWidget {
   final bool isLogin;
   final bool isDarkModeOn;

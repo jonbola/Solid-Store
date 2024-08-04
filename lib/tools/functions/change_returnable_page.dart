@@ -5,9 +5,3 @@ Function()? changeReturnablePage(
   return () =>
       Navigator.push(context, MaterialPageRoute(builder: (build) => page));
 }
-
-Function(int) changeReturnableItemPage(int index, BuildContext context,
-    Function(BuildContext) build, Widget page) {
-  return (index) =>
-      Navigator.push(context, MaterialPageRoute(builder: (build) => page));
-}

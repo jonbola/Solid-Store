@@ -132,9 +132,9 @@ class _SigninPageState extends State<AdminSigninPage> {
                           ),
                           child: TextButton(
                             onPressed: _handleSignup,
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Text(
                                   "Sign up",
                                   style: TextStyle(
@@ -165,7 +165,8 @@ class _SigninPageState extends State<AdminSigninPage> {
                           width: MediaQuery.of(context).size.width / 3,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: Colors.indigo, width: 1.5),
+                            border:
+                                Border.all(color: Colors.indigo, width: 1.5),
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(55),
                               bottomRight: Radius.circular(55),
@@ -232,16 +233,20 @@ class _SigninPageState extends State<AdminSigninPage> {
             passwordFieldController.text,
           );
         }
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const LoginPage(true),
-          ),
-        );
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginPage(true),
+            ),
+          );
+        }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: $e')),
+          );
+        }
       }
     }
   }

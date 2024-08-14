@@ -6,7 +6,8 @@ class CategoryAdd extends StatefulWidget {
   final bool isUpdate;
   final CategoryModel? categoryModel;
 
-  const CategoryAdd({Key? key, this.isUpdate = false, this.categoryModel}) : super(key: key);
+  const CategoryAdd({Key? key, this.isUpdate = false, this.categoryModel})
+      : super(key: key);
 
   @override
   State<CategoryAdd> createState() => _CategoryAddState();
@@ -25,7 +26,9 @@ class _CategoryAddState extends State<CategoryAdd> {
       );
 
       setState(() {});
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 
@@ -34,10 +37,13 @@ class _CategoryAddState extends State<CategoryAdd> {
 
     if (name.isNotEmpty) {
       await _databaseService.updateCategory(
-        CategoryModel(categoryId: widget.categoryModel!.categoryId, categoryName: name),
+        CategoryModel(
+            categoryId: widget.categoryModel!.categoryId, categoryName: name),
       );
 
-      Navigator.pop(context);
+      if (mounted) {
+        Navigator.pop(context);
+      }
     }
   }
 

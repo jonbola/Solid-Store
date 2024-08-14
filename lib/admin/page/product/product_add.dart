@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../../database/model/product.dart';
 import '../../../database/helper/db_helper.dart';
@@ -22,7 +24,8 @@ class ProductAdd extends StatefulWidget {
 class _ProductAddState extends State<ProductAdd> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
-  final TextEditingController _stockQuantityController = TextEditingController();
+  final TextEditingController _stockQuantityController =
+      TextEditingController();
   final TextEditingController _imgController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
   final DatabaseHelper _databaseService = DatabaseHelper();
@@ -31,7 +34,8 @@ class _ProductAddState extends State<ProductAdd> {
   int? _selectedCategoryId;
   List<CategoryModel> _categories = [];
 
-  String get titleText => widget.isUpdate ? "Update Product" : "Add New Product";
+  String get titleText =>
+      widget.isUpdate ? "Update Product" : "Add New Product";
 
   Future<void> _fetchCategories() async {
     try {
@@ -45,10 +49,12 @@ class _ProductAddState extends State<ProductAdd> {
         }
       });
     } catch (e) {
-      print('Error fetching categories: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error fetching categories: $e')),
-      );
+      log('Error fetching categories: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error fetching categories: $e')),
+        );
+      }
     }
   }
 
@@ -59,7 +65,8 @@ class _ProductAddState extends State<ProductAdd> {
 
     final name = _nameController.text.trim();
     final price = double.tryParse(_priceController.text.trim()) ?? 0.0;
-    final stockQuantity = int.tryParse(_stockQuantityController.text.trim()) ?? 0;
+    final stockQuantity =
+        int.tryParse(_stockQuantityController.text.trim()) ?? 0;
     final img = _imgController.text.trim();
     final description = _descController.text.trim();
 
@@ -99,12 +106,16 @@ class _ProductAddState extends State<ProductAdd> {
       } else {
         await _databaseService.addProduct(product);
       }
-      Navigator.pop(context, true); // Return success indicator
+      if (mounted) {
+        Navigator.pop(context, true); // Return success indicator
+      }
     } catch (e) {
-      print('Error saving/updating product: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error saving/updating product: $e')),
-      );
+      log('Error saving/updating product: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error saving/updating product: $e')),
+        );
+      }
     } finally {
       setState(() {
         _isLoading = false;
@@ -118,7 +129,8 @@ class _ProductAddState extends State<ProductAdd> {
     if (widget.isUpdate && widget.productModel != null) {
       _nameController.text = widget.productModel!.productName;
       _priceController.text = widget.productModel!.price.toString();
-      _stockQuantityController.text = widget.productModel!.stockQuantity.toString();
+      _stockQuantityController.text =
+          widget.productModel!.stockQuantity.toString();
       _imgController.text = widget.productModel!.img;
       _descController.text = widget.productModel!.description;
       _selectedCategoryId = widget.productModel!.categoryId;
@@ -162,7 +174,8 @@ class _ProductAddState extends State<ProductAdd> {
                 border: OutlineInputBorder(),
                 hintText: 'Enter price',
               ),
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
             ),
             const SizedBox(height: 16.0),
             TextField(
@@ -196,7 +209,7 @@ class _ProductAddState extends State<ProductAdd> {
               items: _categories.map((category) {
                 return DropdownMenuItem<int>(
                   value: category.categoryId,
-                  child: Text(category.categoryName ?? 'Unnamed Category'),
+                  child: Text(category.categoryName /*?? 'Unnamed Category'*/),
                 );
               }).toList(),
               onChanged: (value) {

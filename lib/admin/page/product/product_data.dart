@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../../../database/model/product.dart';
@@ -50,7 +51,8 @@ class _ProductBuilderState extends State<ProductBuilder> {
 
   // Function to decode base64 image string
   Uint8List decodeBase64(String base64String) {
-    final base64StringCleaned = base64String.replaceFirst('data:image/jpeg;base64,', '');
+    final base64StringCleaned =
+        base64String.replaceFirst('data:image/jpeg;base64,', '');
 
     // Ensure base64 string length is a multiple of 4 by padding
     String base64StringWithPadding = base64StringCleaned;
@@ -62,7 +64,8 @@ class _ProductBuilderState extends State<ProductBuilder> {
     return base64Decode(base64StringWithPadding);
   }
 
-  Future<void> _confirmDelete(BuildContext context, ProductModel product) async {
+  Future<void> _confirmDelete(
+      BuildContext context, ProductModel product) async {
     final shouldDelete = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -112,12 +115,13 @@ class _ProductBuilderState extends State<ProductBuilder> {
                             image: MemoryImage(decodeBase64(product.img)),
                             fit: BoxFit.cover,
                           )
-                        : product.img.startsWith('http') || product.img.startsWith('https')
+                        : product.img.startsWith('http') ||
+                                product.img.startsWith('https')
                             ? DecorationImage(
                                 image: NetworkImage(product.img),
                                 fit: BoxFit.cover,
                                 onError: (error, stackTrace) {
-                                  print('Error loading image: $error');
+                                  log('Error loading image: $error');
                                   // Optionally set a placeholder image or handle the error
                                 },
                               )
@@ -127,7 +131,8 @@ class _ProductBuilderState extends State<ProductBuilder> {
               alignment: Alignment.center,
               child: product.img.isEmpty
                   ? Text(
-                      product.productName.substring(0, 1), // Display first letter of the name
+                      product.productName
+                          .substring(0, 1), // Display first letter of the name
                       style: const TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
@@ -148,9 +153,16 @@ class _ProductBuilderState extends State<ProductBuilder> {
                     ),
                   ),
                   const SizedBox(height: 4.0),
-                  Text("Price: ${product.price} VND" ,style: TextStyle(color: Colors.red),),
+                  Text(
+                    "Price: ${product.price} VND",
+                    style: const TextStyle(color: Colors.red),
+                  ),
                   const SizedBox(height: 4.0),
-                  Text("Stock: ${product.stockQuantity}" ,style: TextStyle(color: Color.fromARGB(255, 224, 163, 43)),),
+                  Text(
+                    "Stock: ${product.stockQuantity}",
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 224, 163, 43)),
+                  ),
                   const SizedBox(height: 4.0),
                 ],
               ),
@@ -176,7 +188,8 @@ class _ProductBuilderState extends State<ProductBuilder> {
                         fullscreenDialog: true,
                       ),
                     )
-                    .then((_) => setState(() {})); // Refresh the list after updating
+                    .then((_) =>
+                        setState(() {})); // Refresh the list after updating
               },
               icon: Icon(
                 Icons.edit,

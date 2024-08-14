@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../model/user.dart';
@@ -5,13 +7,13 @@ import '../model/category.dart';
 import '../model/product.dart';
 
 class DatabaseHelper {
-  static const int _version = 2;  // Update version number
+  static const int _version = 2; // Update version number
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   factory DatabaseHelper() => _instance;
   DatabaseHelper._internal();
 
   static Database? _database;
-  static String _dbName = "AppDatabase.db";
+  static const String _dbName = "AppDatabase.db";
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -130,7 +132,8 @@ class DatabaseHelper {
       return null;
     }
 
-    return List.generate(maps.length, (index) => UserModel.fromJson(maps[index]));
+    return List.generate(
+        maps.length, (index) => UserModel.fromJson(maps[index]));
   }
 
   // Login Method
@@ -143,7 +146,8 @@ class DatabaseHelper {
     );
 
     if (result.isNotEmpty) {
-      return result.first; // Return the first result, assuming email and password are unique
+      return result
+          .first; // Return the first result, assuming email and password are unique
     }
     return null;
   }
@@ -161,7 +165,7 @@ class DatabaseHelper {
       product.toJson(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    print('Product added: ${product.toJson()}'); // Debug print
+    log('Product added: ${product.toJson()}'); // Debug print
     return result;
   }
 
@@ -187,26 +191,29 @@ class DatabaseHelper {
   Future<List<ProductModel>?> getAllProducts() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query("Products");
-    print('Fetched products: $maps'); // Debug print
+    log('Fetched products: $maps'); // Debug print
     if (maps.isEmpty) {
       return null;
     }
-    return List.generate(maps.length, (index) => ProductModel.fromJson(maps[index]));
+    return List.generate(
+        maps.length, (index) => ProductModel.fromJson(maps[index]));
   }
+
   Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-  final db = await database;
-  final List<Map<String, dynamic>> maps = await db.query(
-    'Products',
-    where: 'categoryId = ?',
-    whereArgs: [categoryId],
-  );
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      'Products',
+      where: 'categoryId = ?',
+      whereArgs: [categoryId],
+    );
 
-  if (maps.isEmpty) {
-    return [];
+    if (maps.isEmpty) {
+      return [];
+    }
+
+    return List.generate(
+        maps.length, (index) => ProductModel.fromJson(maps[index]));
   }
-
-  return List.generate(maps.length, (index) => ProductModel.fromJson(maps[index]));
-}
 
   // Categories
   Future<void> insertCategory(CategoryModel categoryModel) async {

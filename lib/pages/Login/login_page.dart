@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../database/helper/db_helper.dart';
@@ -33,14 +35,14 @@ class _LoginPageState extends State<LoginPage> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('userEmail');
     await prefs.remove('userRole');
-    print('Session cleared');
+    log('Session cleared');
   }
 
   Future<void> login() async {
-    print('Attempting to log in with email: ${useremail.text}');
+    log('Attempting to log in with email: ${useremail.text}');
     var response = await dbHelper.login(
         useremail.text, password.text); // Use the instance to call the method
-    print('Login response: $response');
+    log('Login response: $response');
     if (response != null) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('userEmail', useremail.text);

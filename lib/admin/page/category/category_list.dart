@@ -18,7 +18,7 @@ class _CategoryListState extends State<CategoryList> {
       appBar: AppBar(
         title: const Text("Category List"),
       ),
-      body: Center(child: CategoryBuilder()),
+      body: const Center(child: CategoryBuilder()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context)

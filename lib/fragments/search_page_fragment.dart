@@ -62,7 +62,7 @@ class _SearchPageFragmentState extends State<SearchPageFragment> {
             login
                 ? Consumer<CartProvider>(
                     builder: (context, cartProvider, child) {
-                      final itemCount = cartProvider.items?.length ?? 0;
+                      final itemCount = cartProvider.items.length;
                       return Stack(
                         clipBehavior: Clip.none,
                         children: [
@@ -171,8 +171,8 @@ class _SearchPageFragmentState extends State<SearchPageFragment> {
                 final filteredProducts = selectedCategory == null
                     ? snapshot.data!
                     : snapshot.data!
-                        .where(
-                            (product) => product.categoryId == selectedCategory)
+                        .where((product) =>
+                            product.categoryId.toString() == selectedCategory)
                         .toList();
 
                 return SearchableList<ProductModel>(

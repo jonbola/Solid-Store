@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../../../database/model/product.dart';
@@ -48,7 +49,7 @@ class ProductItem extends StatelessWidget {
                                 image: NetworkImage(product.img),
                                 fit: BoxFit.cover,
                                 onError: (error, stackTrace) {
-                                  print('Error loading image: $error');
+                                  log('Error loading image: $error');
                                   // Optionally set a placeholder image or handle the error
                                 },
                               )

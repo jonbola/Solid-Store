@@ -26,7 +26,7 @@ class _ProductListState extends State<ProductList> {
           // Navigate to ProductAdd screen to add a new product
           final result = await Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => ProductAdd(),
+              builder: (_) => const ProductAdd(),
               fullscreenDialog: true,
             ),
           );

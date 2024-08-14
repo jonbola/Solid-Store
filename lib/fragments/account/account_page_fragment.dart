@@ -14,8 +14,6 @@ import 'package:eletronic_conponents_store/tools/values/en_string_values.dart';
 import 'package:eletronic_conponents_store/tools/values/vn_string_values.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../database/model/user_data.dart';
-import '../../database/helper/db_helper.dart';
 
 class AccountPageFragment extends StatefulWidget {
   final bool isLogin;
@@ -30,7 +28,7 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
   late bool isEnabled;
   late bool isVisible;
   late DarkModeController darkModeController;
-  
+
   @override
   void initState() {
     super.initState();
@@ -39,7 +37,6 @@ class _AccountPageFragmentState extends State<AccountPageFragment> {
     isVisible = false;
     darkModeController = context.read<DarkModeController>();
   }
-
 
   @override
   Widget build(BuildContext context) {

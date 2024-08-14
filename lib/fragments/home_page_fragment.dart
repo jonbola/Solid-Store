@@ -54,7 +54,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
               children: <Widget>[
                 Image.asset(
                   'resources/images/img_logo.png',
-                  height: 40.0,
+                  height: 50.0,
                   width: 50.0,
                 ),
                 const CustomText(
@@ -73,7 +73,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                 height: 50.0,
                 child: login
                     ? IconButton(
-                        onPressed: () => changeReturnablePage(
+                        onPressed: changeReturnablePage(
                           context,
                           build,
                           CartPage(darkMode.status),
@@ -81,7 +81,7 @@ class _HomePageFragmentState extends State<HomePageFragment> {
                         icon: Image.asset('resources/icons/ic_shopping_cart.png'),
                       )
                     : IconButton(
-                        onPressed: () => changeReturnablePage(
+                        onPressed: changeReturnablePage(
                           context,
                           build,
                           LoginPage(darkMode.status),
